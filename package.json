@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test"
+	"start": "index.js"
   },
   "author": "Ety",
   "license": "LGPL-3.0",
