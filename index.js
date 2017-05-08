@@ -1,14 +1,35 @@
 // Import the discord.js module
-const discord = require('discord.js')
+const Discord = require('discord.js')
+
+// Import the birthday table
+const Table = require('easy-table')
 
 // Create an instance of Discord that we will use to control the bot
-const bot = new discord.Client();
+const bot = new Discord.Client();
 
 // Token for your bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
 const token = 'MzA4OTczMTU2NTc4ODg1NjMy.C-zYYw.i5kCT8X6Q0h76Oh85zNAEsE1WTE'
 
 // test channel
 var welcomeChannel;
+
+// Birthday data
+var data = [
+  { id: 212699799730913281, birth: '15/07' },	// Ety
+  { id: 154809485116964864, birth: '12/08'},	// Kyos
+  { id: 154809485116964864, birth: '12/08'},	// Kyos
+  { id: 308973156578885632, birth: '08/05'}	// Birthday-bot
+]
+
+var t = new Table
+
+data.forEach(function(element) {
+  t.cell('Product Id', element.id)
+  t.cell('Description', element.birth)
+  t.newRow()
+})
+
+console.log(t.toString())
 
  
  // Gets called when our bot is successfully logged in and connected

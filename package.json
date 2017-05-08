@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "node index.js"
+	"start": "node index.js"
   },
   "author": "Ety",
   "license": "LGPL-3.0",
   "dependencies": {
-    "discord.js": "^11.1.0"
+    "discord.js": "^11.1.0",
+	"easy-table": "^1.1.0"
   }
 }
