@@ -49,8 +49,8 @@ bot.on("message", function (msg) {
 		console.log("pong-ed " + msg.author.username);
 	}
 	// if message begins with "birth"
-	if (msg.channel === welcomeChannel && message.content.startsWith("!birth")) {
-		let args = message.content.split(" ").slice(1);
+	if (msg.channel === welcomeChannel && msg.content.startsWith("!birth")) {
+		let args = msg.content.split(" ").slice(1);
 		let birthday_date = args[0]; // yes, start at 0, not 1. I hate that too.
 		welcomeChannel.send("Changed ${message.author.name}\'s birthday to ${birthday_date} :FeelsBirthdayMan: ");
 		}
