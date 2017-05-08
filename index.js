@@ -52,7 +52,7 @@ bot.on("message", function (msg) {
 	if (msg.channel === welcomeChannel && msg.content.startsWith("!birth")) {
 		let args = msg.content.split(" ").slice(1);
 		let birthday_date = args[0]; // yes, start at 0, not 1. I hate that too.
-		welcomeChannel.send("Changed ${msg.author.id}\'s birthday to ${birthday_date} <:FeelsBirthdayMan:311182447020867585>");
+		welcomeChannel.send(`Changed ${msg.author}\'s birthday to ${birthday_date} <:FeelsBirthdayMan:311182447020867585>`);
 		}
 });
   
