@@ -48,6 +48,12 @@ bot.on("message", function (msg) {
 		// alert the console
 		console.log("pong-ed " + msg.author.username);
 	}
+	// if message begins with "birth"
+	if (message.content.startsWith("!birth")) {
+		let args = message.content.split(" ").slice(1);
+		let birthday_date = args[0]; // yes, start at 0, not 1. I hate that too.
+		message.reply("Changed ${message.author.name}'s birthday to ${birthday_date} :FeelsBirthdayMan: ");
+		}
 });
   
  bot.login(token);
