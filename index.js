@@ -27,6 +27,7 @@ var data = [
 ]
 
 var t = new Table
+var s = new Cane
 
 data.forEach(function(element) {
   t.cell('User ID', element.id)
@@ -62,7 +63,7 @@ bot.on("message", function (msg) {
 		//<:FeelsBirthdayMan:311182447020867585>`);
 		}
 		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
-			var today = Date.create('today').long();
+			var today = s.Date.create('today').long();
 			welcomeChannel.send(today);
 		}
 });
