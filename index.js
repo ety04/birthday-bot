@@ -17,8 +17,10 @@ var welcomeChannel;
 var data = [
   { id: 212699799730913281, birth: '15/07' },	// Ety
   { id: 154809485116964864, birth: '12/08'},	// Kyos
-  { id: 154809485116964864, birth: '12/08'},	// Kyos
-  { id: 308973156578885632, birth: '08/05'}	// Birthday-bot
+  { id: 113723104286605319, birth: '29/04'},	// Roosta
+  { id: 199997219577790464, birth: '11/11'},	// Sarieux
+  { id: 142722101961424896, birth: '24/11'},	// zer0skar
+  { id: 308973156578885632, birth: '09/05'}	// Birthday-bot
 ]
 
 var t = new Table
@@ -53,7 +55,12 @@ bot.on("message", function (msg) {
 		let args = msg.content.split(" ").slice(1);
 		let birthday_date = args[0]; // yes, start at 0, not 1. I hate that too.
 		const emoji = msg.guild.emojis.first();
-		welcomeChannel.send(`Changed ${msg.author} \'s birthday to ${birthday_date} ${emoji.name.FeelsBirthdayMan}`);
+		welcomeChannel.send('Changed ${msg.author} \'s birthday to ${birthday_date} :emoji: ') ;
+		//<:FeelsBirthdayMan:311182447020867585>`);
+		}
+		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
+			var today = Date.create('today').long();
+			welcomeChannel.send(today);
 		}
 });
   
