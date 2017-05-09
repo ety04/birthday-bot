@@ -63,7 +63,7 @@ bot.on("message", function (msg) {
 		//<:FeelsBirthdayMan:311182447020867585>`);
 		}
 		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
-			var today = s.Date.long();
+			var today = s.Date().long();
 			welcomeChannel.send(today);
 		}
 });
