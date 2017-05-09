@@ -4,6 +4,9 @@ const Discord = require('discord.js')
 // Import the birthday table
 const Table = require('easy-table')
 
+// Import the sugar module
+const Cane = require('sugar')
+
 // Create an instance of Discord that we will use to control the bot
 const bot = new Discord.Client();
 
@@ -26,8 +29,8 @@ var data = [
 var t = new Table
 
 data.forEach(function(element) {
-  t.cell('Product Id', element.id)
-  t.cell('Description', element.birth)
+  t.cell('User ID', element.id)
+  t.cell('Birthday', element.birth)
   t.newRow()
 })
 
