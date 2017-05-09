@@ -58,7 +58,7 @@ bot.on("message", function (msg) {
 		let args = msg.content.split(" ").slice(1);
 		let birthday_date = args[0]; // yes, start at 0, not 1. I hate that too.
 		const emoji = msg.guild.emojis.first();
-		welcomeChannel.send('Changed ${msg.author} \'s birthday to ${birthday_date} :emoji: ') ;
+		welcomeChannel.send('Changed ${msg.author} \'s birthday to ${birthday_date} ${emoji} ') ;
 		//<:FeelsBirthdayMan:311182447020867585>`);
 		}
 		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
