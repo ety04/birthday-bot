@@ -3,6 +3,7 @@
 * ~~~~~
 * With the blessing of soloGod, a new race has been brought to the server: the Aegyl, with the user @birthday-bot. 
 * birthday-bot is made only for your satisfaction, and will answer to specific commands that will be added below as you discover them.
+* Message me if you have a command idea and I will add it! It will be written below as well... once the others have guessed it :japanese_ogre:
 * ~~~~~
 * birthday-bot is free to use, modify and redistribute. If you mention the creator, it's better.
 * Creator: Ety... I mean soloman FeelsBirthdayMan
@@ -53,6 +54,7 @@ const data = [
   { id: "113727842692497410", birth: '19/07'},	// Leo
   { id: "154809485116964864", birth: '12/08'},	// Kyos
   { id: "190204168257011712", birth: '16/09'},	// Bébert
+  { id: "314797224695693314", birth: '03/10'},	// Blue
   { id: "199997219577790464", birth: '11/11'},	// Sarieux
   { id: "142722101961424896", birth: '24/11'}	// zer0skar
 ]
@@ -369,6 +371,12 @@ bot.on("message", function (msg) {
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
 			welcomeChannel.send(atMention());
+});
+
+// When a new member joins the server
+bot.on("serverNewMember", function (serv, u) {
+		let w = serv.owner;
+		welcomeChannel.send(`Welcome ${u} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
  
