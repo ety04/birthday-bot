@@ -3,7 +3,7 @@
 * ~~~~~
 * With the blessing of soloGod, a new race has been brought to the server: the Aegyl, with the user @birthday-bot. 
 * birthday-bot is made only for your satisfaction, and will answer to specific commands that will be added below as you discover them.
-* Message me if you have a command idea and I will add it! It will be written below as well... once the others have guessed it :japanese_ogre:
+* Message me if you have a command idea and they will be added! It will be written below as well... once the others have guessed it :japanese_ogre:
 * ~~~~~
 * birthday-bot is free to use, modify and redistribute. If you mention the creator, it's better.
 * Creator: Ety... I mean soloman FeelsBirthdayMan
@@ -362,7 +362,7 @@ bot.on("message", function (msg) {
 		// date reminder
 		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
 			var today = new Date();
-			welcomeChannel.send(`${today}`);
+			welcomeChannel.send(`I never liked you but soloman told me to make an exception so here is the date: ${today} ${emoji}`);
 		}
 		// ask for today's birthdays
 		if (msg.channel === welcomeChannel && msg.content === "!today") {
