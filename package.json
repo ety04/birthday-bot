@@ -5,7 +5,7 @@
   "main": "index_prod.js",
   "scripts": {
     "test": "test",
-	"start": "node index.js"
+	"start": "node index_prod.js"
   },
   "author": "Ety",
   "license": "LGPL-3.0",
