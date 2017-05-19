@@ -2,7 +2,7 @@
   "name": "birthday-bot",
   "version": "1.0.0",
   "description": "FeelsBirthdayMan",
-  "main": "index.js",
+  "main": "index_prod.js",
   "scripts": {
     "test": "test",
 	"start": "node index.js"
