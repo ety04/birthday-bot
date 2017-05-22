@@ -241,7 +241,7 @@ function randomWish(u)
 	const wishes = [
 	`It\'s great to have one\'s birthday everyday ${u}, don't you think? ${emoji}`,
 	`Another birthday for ${u}. Soloman will be jealous ${emoji}`,
-	`How many birthday bois do we have here? It gets too much ${emoji}`,
+	`Again ${u} ! How many birthday bois do we have here? It gets too much ${emoji}`,
 	`- Thanks ${u} - You're welcome solo. Happy birthday ${emoji} - Goddamit ${u}`,
 	`Let's bake a birthday cake for ${u} together!! ${emoji}`,
 	`Growing fast ${u}! Are you getting older than Vaan?! Soon we need an abs contest ${emoji}`,
