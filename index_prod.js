@@ -43,7 +43,6 @@ var emoji;
 
 // Birthday data
 const data = [
-  { id: "118150122893737991", birth: 'today'},	// Qazplm		// false
   { id: "159600065017675778", birth: '11/02'},	// Hoishin		// false
   { id: "112623145852080128", birth: '11/02'},	// Harvey
   { id: "113723104286605319", birth: '29/04'},	// Roosta
@@ -53,6 +52,7 @@ const data = [
   { id: "212699799730913281", birth: '15/07'},	// Ety
   { id: "113727842692497410", birth: '19/07'},	// Leo
   { id: "154809485116964864", birth: '12/08'},	// Kyos
+  { id: "118150122893737991", birth: '24/08'},	// Qazplm		// false
   { id: "190204168257011712", birth: '16/09'},	// Bébert
   { id: "314797224695693314", birth: '03/10'},	// Blue
   { id: "199997219577790464", birth: '11/11'},	// Sarieux
