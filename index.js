@@ -43,9 +43,10 @@ var emoji;
 
 // Birthday data
 const data = [
-  { id: "118150122893737991", birth: 'today'},	// Qazplm		// false
+  //{ id: "118150122893737991", birth: 'today'},// Qazplm		// false
   { id: "159600065017675778", birth: '11/02'},	// Hoishin		// false
   { id: "112623145852080128", birth: '11/02'},	// Harvey
+  { id: "107164123388735488", birth: '27/03'},	// Eden (and Flobber)
   { id: "113723104286605319", birth: '29/04'},	// Roosta
   { id: "193150846291279881", birth: '02/06'},	// Seth
   { id: "210538981509562391", birth: '05/06'},	// Deedlit
@@ -319,6 +320,7 @@ function atMention()
 	var u = bot.users.get("118150122893737991");
 	welcomeChannel.send(randomWish(u));
 })*/
+// Daily notice
 time.on('day', () =>
 	checkToday()
 )
@@ -371,7 +373,7 @@ bot.on("message", function (msg) {
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
-			welcomeChannel.send(atMention());
+			msg.channel.send(atMention());
 });
 
 // When a new member joins the server
