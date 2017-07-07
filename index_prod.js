@@ -320,6 +320,7 @@ function atMention()
 	var u = bot.users.get("118150122893737991");
 	welcomeChannel.send(randomWish(u));
 })*/
+// Daily notice
 time.on('day', () =>
 	checkToday()
 )
