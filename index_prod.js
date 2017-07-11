@@ -211,10 +211,10 @@ function sendHappyBirthday(d)
 /**
  * -----> checkToday
  * Sends a message that says whose birthday it is today
- * @param {void}
+ * @param {boolean} daily : says if the function has been called everyday or not
  * @return {void}
  */
-function checkToday()
+function checkToday(daily)
 {
 	var snif = true;
 	for(let d of data) {
@@ -225,7 +225,7 @@ function checkToday()
 			sendHappyBirthday(d)
 		}
 	}
-	if(snif)
+	if(snif && !daily)
 	{
 		var bad = emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBadMan');
 		welcomeChannel.send(`It\'s no one\'s birthday today ${bad}`);
@@ -322,7 +322,7 @@ function atMention()
 })*/
 // Daily notice
 time.on('day', () =>
-	checkToday()
+	checkToday(true)
 )
 
 
@@ -369,7 +369,7 @@ bot.on("message", function (msg) {
 		}
 		// ask for today's birthdays
 		if (msg.channel === welcomeChannel && msg.content === "!today") {
-			checkToday()
+			checkToday(false)
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
