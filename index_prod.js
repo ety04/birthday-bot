@@ -34,7 +34,7 @@ const bot = new Discord.Client();
 const token = 'MzA4OTczMTU2NTc4ODg1NjMy.C-zYYw.i5kCT8X6Q0h76Oh85zNAEsE1WTE'
 
 // channel used
-var welcomeChannel;
+var welcomeChannel, testChannel;
 const testing = "308968674721792002";
 const random_talk = "232478667891015680";
 
@@ -43,20 +43,20 @@ var emoji;
 
 // Birthday data
 const data = [
+  //{ id: "118150122893737991", birth: 'today'},// Qazplm		// false
   { id: "159600065017675778", birth: '11/02'},	// Hoishin		// false
   { id: "112623145852080128", birth: '11/02'},	// Harvey
   { id: "107164123388735488", birth: '27/03'},	// Eden (and Flobber)
   { id: "113723104286605319", birth: '29/04'},	// Roosta
   { id: "193150846291279881", birth: '02/06'},	// Seth
   { id: "210538981509562391", birth: '05/06'},	// Deedlit
-  { id: "84128419964551168",  birth: '06/07'},  // AlecK
-  { id: "212699799730913281", birth: '15/07'},	// Ety
+  { id: "84128419964551168",  birth: '06/07' },	// AlecK
+  { id: "212699799730913281", birth: '15/07' },	// Ety
   { id: "113727842692497410", birth: '19/07'},	// Leo
   { id: "154809485116964864", birth: '12/08'},	// Kyos
   { id: "118150122893737991", birth: '24/08'},	// Qazplm		// false
   { id: "190204168257011712", birth: '16/09'},	// Bébert
   { id: "314797224695693314", birth: '03/10'},	// Blue
-  { id: "199997219577790464", birth: '11/11'},	// Sarieux
   { id: "105135372484243456", birth: '15/11'},	// Coughchamp
   { id: "142722101961424896", birth: '24/11'}	// zer0skar
 ]
@@ -196,25 +196,27 @@ function getMonth(d)
 /**
  * -----> sendHappyBirthday
  * This is all what this bot's about! Happy birthday soloman! FeelsBirthdayMan
- * @param {data}	d	: an element of the data table (id + birth)
+ * @param {Channel} channel : the channel which has been called
+ * @param {data}	       d	            : an element of the data table (id + birth)
  * @return {void}
  */
-function sendHappyBirthday(d)
+function sendHappyBirthday(channel, d)
 {
 	var u = bot.users.get(d.id);
 	let wish = `Happy birthday ${u} ! Don\'t stay alone, go share your birthday party with soloman ${emoji}`;
 	if(d.birth === "today")
 		wish = randomWish(u);
-	welcomeChannel.send(wish);
+	channel.send(wish);
 }
 
 /**
  * -----> checkToday
  * Sends a message that says whose birthday it is today
- * @param {boolean} daily : says if the function has been called everyday or not
+ * @param {Channel} channel : the channel which has been called
+ * @param {boolean} daily       : says if the function has been called everyday or not
  * @return {void}
  */
-function checkToday(daily)
+function checkToday(channel, daily)
 {
 	var snif = true;
 	for(let d of data) {
@@ -222,14 +224,48 @@ function checkToday(daily)
 		if(isToday(aBirthday))
 		{
 			snif = false;
-			sendHappyBirthday(d)
+			sendHappyBirthday(channel, d)
 		}
 	}
 	if(snif && !daily)
 	{
 		var bad = emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBadMan');
-		welcomeChannel.send(`It\'s no one\'s birthday today ${bad}`);
+		channel.send(`It\'s no one\'s birthday today ${bad}`);
 	}
+}
+
+/**
+ * -----> randomPastWish
+ * Returns a comment for someone who has had a past birthday
+ * @return {String} 				 : comment to send to the channel
+ */
+function randomPastWish()
+{
+	const wishes = [
+	 `I hope your birthday cake was bigger than soloman's ${emoji}`,
+	`I remember that time in Dalmasca with Penelo drinking. It was awesome! ${emoji}`,
+	`Do you remember when we celebrated in Rozarria? No? Well, neither do I ${emoji}`,
+	`I loved it when Theme of the Empire was played when they entered ${emoji}`,
+	`Oh right! It was when I asked you to bring a Giza rabbit and you brought Fran ${emoji}`
+	];
+	return wishes[Math.floor(Math.random() * wishes.length)]
+}
+
+/**
+ * -----> randomFutureWish
+ * Returns a comment for someone who has a future birthday
+ * @return {String} 				 : comment to send to the channel
+ */
+function randomFutureWish()
+{
+	const wishes = [
+	 `I\'ll call soloman at once to prepare a celebratory swimming pool dance! Make sure you don\'t have Vaan\'s abs ${emoji}`,
+	`Can I join in the party? I'll bring cookies ${emoji}`,
+	`What did you plan? If you're out of ideas, ask soloman ${emoji}`,
+	`That's not in a long time! Come on guys, which gifts should we get him? ${emoji}`,
+	`I can feel a weeb party coming! Enjoy the show ${emoji}`
+	];
+	return wishes[Math.floor(Math.random() * wishes.length)]
 }
 
 /**
@@ -280,9 +316,9 @@ function getBirthday(next) {
 		else if(isFuture(nBirthday)){
 			v = bot.users.get(d.id);
 			if(!next)
-				return `Last birthday : ${u} (${getDay(pBirthday)}, ${getMonth(pBirthday)} ${pBirthday.getDate()} ${yearHead.getFullYear()}). I hope your birthday cake was bigger than soloman's ${emoji}`;
+				return `Last birthday : ${u} (${getDay(pBirthday)}, ${getMonth(pBirthday)} ${pBirthday.getDate()} ${yearHead.getFullYear()}). ${randomPastWish()}`;
 			else
-				return `Next birthday : ${v} (${getDay(nBirthday)}, ${getMonth(nBirthday)} ${nBirthday.getDate()} ${yearHead.getFullYear()}). I\'ll call soloman at once to prepare a celebratory swimming pool dance! Make sure you don\'t have Vaan\'s abs ${emoji}`;
+				return `Next birthday : ${v} (${getDay(nBirthday)}, ${getMonth(nBirthday)} ${nBirthday.getDate()} ${yearHead.getFullYear()}). ${randomFutureWish()}`;
 		}
 	}
 }
@@ -314,6 +350,17 @@ function atMention()
 }
 
 
+/**
+ * -----> checkChannels
+ * Checks if the message has been sent either in #random_talk or #test
+ * @param {Message}	 msg	 : the message to check
+ * @return {boolean} 				 : if the message has been sent in the approved channels
+ */
+function checkChannels(msg)
+{
+	return (msg.channel === welcomeChannel) || (msg.channel == testChannel);
+}
+
 /** -------------------- TIME EVENTS ----------------------- */
 // Timer strats
 /* time.on('second', () => {
@@ -321,15 +368,16 @@ function atMention()
 	welcomeChannel.send(randomWish(u));
 })*/
 // Daily notice
-time.on('day', () =>
-	checkToday(true)
+/*time.on('day', () =>
+	checkToday(welcomeChannel, true)
 )
-
+*/
 
 /** -------------------- DISCORD EVENTS ----------------------- */
  // Gets called when our bot is successfully logged in and connected
 bot.on('ready', () => {
 	welcomeChannel = bot.channels.get(random_talk);
+	testChannel = bot.channels.get(testing);
 	emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBirthdayMan');
 	data.sort(compare)
 	time.start()
@@ -348,28 +396,32 @@ bot.on('ready', () => {
  // This code will run once the bot receives any message.
 bot.on("message", function (msg) {
 		// if message begins with "ping"
-		if (msg.channel === welcomeChannel && msg.content.indexOf("ping") === 0) {
+		if (checkChannels(msg) && msg.content.indexOf("ping") === 0) {
 		// send a message to the channel the ping message was sent in.
-		welcomeChannel.send("pong!");
+		msg.channel.send("pong!");
 		// alert the console
 		console.log("pong-ed " + msg.author.username);
 		}
 		// ask for last birthday
-		if (msg.channel === welcomeChannel && msg.content === "!birthday") {
-			welcomeChannel.send(getBirthday(false)) ;
+		if (checkChannels(msg) && msg.content === "!birthday") {
+			msg.channel.send(getBirthday(false)) ;
 		}
 		// ask for next birthday
-		if (msg.channel === welcomeChannel && msg.content === "!next") {
-			welcomeChannel.send(getBirthday(true)) ;
+		if (checkChannels(msg) && msg.content === "!next") {
+			msg.channel.send(getBirthday(true)) ;
 		}
 		// date reminder
-		if (msg.channel === welcomeChannel && msg.content.startsWith("!date")) {
+		if (checkChannels(msg) && msg.content.startsWith("!date")) {
 			var today = new Date();
-			welcomeChannel.send(`I never liked you but soloman told me to make an exception so here is the date: ${today} ${emoji}`);
+			msg.channel.send(`I never liked you but soloman told me to make an exception so here is the date: ${today} ${emoji}`);
 		}
 		// ask for today's birthdays
-		if (msg.channel === welcomeChannel && msg.content === "!today") {
-			checkToday(false)
+		if (checkChannels(msg) && msg.content === "!today") {
+			checkToday(msg.channel, false)
+		}
+		// ask for sender's birthday
+		if (checkChannels(msg) && msg.content === "!mine") {
+			msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))

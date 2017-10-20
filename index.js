@@ -34,7 +34,7 @@ const bot = new Discord.Client();
 const token = 'MzA4OTczMTU2NTc4ODg1NjMy.C-zYYw.i5kCT8X6Q0h76Oh85zNAEsE1WTE'
 
 // channel used
-var welcomeChannel;
+var welcomeChannel, testChannel;
 const testing = "308968674721792002";
 const random_talk = "232478667891015680";
 
@@ -57,7 +57,6 @@ const data = [
   { id: "118150122893737991", birth: '24/08'},	// Qazplm		// false
   { id: "190204168257011712", birth: '16/09'},	// Bébert
   { id: "314797224695693314", birth: '03/10'},	// Blue
-  { id: "199997219577790464", birth: '11/11'},	// Sarieux
   { id: "105135372484243456", birth: '15/11'},	// Coughchamp
   { id: "142722101961424896", birth: '24/11'}	// zer0skar
 ]
@@ -234,6 +233,23 @@ function checkToday(daily)
 }
 
 /**
+ * -----> randomFutureWish
+ * Returns a comment for someone who has a future birthday
+ * @return {String} 				 : comment to send to the channel
+ */
+function randomFutureWish()
+{
+	const wishes = [
+	 `I\'ll call soloman at once to prepare a celebratory swimming pool dance! Make sure you don\'t have Vaan\'s abs ${emoji}`,
+	`Can I join in the party? I'll bring cookies ${emoji}`,
+	`What did you plan? If you're out of ideas, ask soloman ${emoji}`,
+	`That's not in a long time! Come on guys, which gifts should we get him? ${emoji}`,
+	`I can feel a weeb party coming! Enjoy the show ${emoji}`
+	];
+	return wishes[Math.floor(Math.random() * wishes.length)]
+}
+
+/**
  * -----> randomWish
  * Returns a birthday wish for a person that has many, many birthdays
  * @param {User} u 			 : Discord user whom we want to send to wish to
@@ -283,7 +299,7 @@ function getBirthday(next) {
 			if(!next)
 				return `Last birthday : ${u} (${getDay(pBirthday)}, ${getMonth(pBirthday)} ${pBirthday.getDate()} ${yearHead.getFullYear()}). I hope your birthday cake was bigger than soloman's ${emoji}`;
 			else
-				return `Next birthday : ${v} (${getDay(nBirthday)}, ${getMonth(nBirthday)} ${nBirthday.getDate()} ${yearHead.getFullYear()}). I\'ll call soloman at once to prepare a celebratory swimming pool dance! Make sure you don\'t have Vaan\'s abs ${emoji}`;
+				return `Next birthday : ${v} (${getDay(nBirthday)}, ${getMonth(nBirthday)} ${nBirthday.getDate()} ${yearHead.getFullYear()}). ${randomFutureWish()}`;
 		}
 	}
 }
