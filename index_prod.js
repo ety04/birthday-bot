@@ -229,7 +229,7 @@ function checkToday(channel, daily)
 	}
 	if(snif && !daily)
 	{
-		var bad = emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBadMan');
+		var bad = welcomeChannel.guild.emojis.find('name', 'FeelsBadMan');
 		channel.send(`It\'s no one\'s birthday today ${bad}`);
 	}
 }
