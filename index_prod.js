@@ -235,6 +235,32 @@ function checkToday(channel, daily)
 }
 
 /**
+ * -----> replySender
+ * Answers the sender of a message with their birthday date
+ * @param {String} userId : The user ID of the sender
+ * @return {String}                  The future birthday of the sender with a comment
+ */
+function replySender(userId)
+{
+	const comment =
+	[`You\'re on fire! ${emoji}`,
+	EHEHE ${emoji},
+	We\'re looking forward to that! ${emoji},
+	The same day as soloman ${emoji},
+	Will you give us a PB to celebrate? ${emoji}
+	];
+	for(let d of data)
+	{
+		if(d.id === userId)
+		{
+			var bday = toDate(d.birth);
+			var year = (isFuture(bday))?new Date().getFullYear():new Date().getFullYear() + 1;   // sets the birthday in the future, either this year or the next
+			return `Dear ${u}, your birthday will be on ${bday.getDay()}, ${bday.getMonth} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * 					comment.length)]}`;
+		}
+	}
+}
+
+/**
  * -----> randomPastWish
  * Returns a comment for someone who has had a past birthday
  * @return {String} 				 : comment to send to the channel
@@ -349,7 +375,6 @@ function atMention()
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
-
 /**
  * -----> checkChannels
  * Checks if the message has been sent either in #random_talk or #test
@@ -421,7 +446,8 @@ bot.on("message", function (msg) {
 		}
 		// ask for sender's birthday
 		if (checkChannels(msg) && msg.content === "!mine") {
-			msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
+			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
+			msg.channel.send(replySender(msg.author.id))
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
@@ -429,9 +455,9 @@ bot.on("message", function (msg) {
 });
 
 // When a new member joins the server
-bot.on("serverNewMember", function (serv, u) {
-		let w = serv.owner;
-		welcomeChannel.send(`Welcome ${u} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
+bot.on("guildMemberAdd", function (guild, member) {
+		let w = guild.owner.user.username;
+		welcomeChannel.send(`Welcome ${member.user.username} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
  
