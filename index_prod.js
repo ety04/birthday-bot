@@ -255,7 +255,7 @@ function replySender(userId)
 		{
 			var bday = toDate(d.birth);
 			var year = (isFuture(bday))?new Date().getFullYear():new Date().getFullYear() + 1;   // sets the birthday in the future, either this year or the next
-			return `Dear ${userId}, your birthday will be on ${bday.getDay()}, ${bday.getMonth} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
+			return `Dear ${userId}, your birthday will be on ${getDay(bday)}, ${bday.getMonth()} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
 		}
 	}
 }
