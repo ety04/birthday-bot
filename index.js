@@ -240,7 +240,7 @@ function checkToday(channel, daily)
  * @param {String} userId : The user ID of the sender
  * @return {String}                  The future birthday of the sender with a comment
  */
-function replySender(userId, username)
+function replySender(userId)
 {
 	const comment =
 	[`You\'re on fire! ${emoji}`,
@@ -254,8 +254,9 @@ function replySender(userId, username)
 		if(d.id === userId)
 		{
 			var bday = toDate(d.birth);
+			var u = bot.users.get(userId);
 			var year = (isFuture(bday))?new Date().getFullYear():new Date().getFullYear() + 1;   // sets the birthday in the future, either this year or the next
-			return `Dear ${username}, your birthday will be on ${getDay(bday)}, ${getMonth(bday)} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
+			return `Dear ${u}, your birthday will be on ${getDay(bday)}, ${getMonth(bday)} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
 		}
 	}
 }
@@ -447,7 +448,7 @@ bot.on("message", function (msg) {
 		// ask for sender's birthday
 		if (checkChannels(msg) && msg.content === "!mine") {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
-			msg.channel.send(replySender(msg.author.id, msg.author.username))
+			msg.channel.send(replySender(msg.author.id))
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
