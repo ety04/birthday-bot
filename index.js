@@ -244,10 +244,10 @@ function replySender(userId)
 {
 	const comment =
 	[`You\'re on fire! ${emoji}`,
-	EHEHE ${emoji},
-	We\'re looking forward to that! ${emoji},
-	The same day as soloman ${emoji},
-	Will you give us a PB to celebrate? ${emoji}
+	`EHEHE ${emoji}`,
+	`We\'re looking forward to that! ${emoji}`,
+	`The same day as soloman ${emoji}`,
+	`Will you give us a PB to celebrate? ${emoji}`
 	];
 	for(let d of data)
 	{
