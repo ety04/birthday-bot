@@ -240,7 +240,7 @@ function checkToday(channel, daily)
  * @param {String} userId : The user ID of the sender
  * @return {String}                  The future birthday of the sender with a comment
  */
-function replySender(userId)
+function replySender(userId, username)
 {
 	const comment =
 	[`You\'re on fire! ${emoji}`,
@@ -255,7 +255,7 @@ function replySender(userId)
 		{
 			var bday = toDate(d.birth);
 			var year = (isFuture(bday))?new Date().getFullYear():new Date().getFullYear() + 1;   // sets the birthday in the future, either this year or the next
-			return `Dear ${userId}, your birthday will be on ${getDay(bday)}, ${bday.getMonth()} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
+			return `Dear ${username}, your birthday will be on ${getDay(bday)}, ${getMonth(bday)} ${bday.getDate()} ${year}. ${comment[Math.floor(Math.random() * comment.length)]}`;
 		}
 	}
 }
@@ -428,26 +428,26 @@ bot.on("message", function (msg) {
 		console.log("pong-ed " + msg.author.username);
 		}
 		// ask for last birthday
-		if (checkChannels(msg) &&  msg.content === "!birthday") {
+		if (checkChannels(msg) && msg.content === "!birthday") {
 			msg.channel.send(getBirthday(false)) ;
 		}
 		// ask for next birthday
-		if (checkChannels(msg) &&  msg.content === "!next") {
+		if (checkChannels(msg) && msg.content === "!next") {
 			msg.channel.send(getBirthday(true)) ;
 		}
 		// date reminder
-		if (checkChannels(msg) &&  msg.content.startsWith("!date")) {
+		if (checkChannels(msg) && msg.content.startsWith("!date")) {
 			var today = new Date();
 			msg.channel.send(`I never liked you but soloman told me to make an exception so here is the date: ${today} ${emoji}`);
 		}
 		// ask for today's birthdays
-		if (checkChannels(msg) &&  msg.content === "!today") {
+		if (checkChannels(msg) && msg.content === "!today") {
 			checkToday(msg.channel, false)
 		}
 		// ask for sender's birthday
 		if (checkChannels(msg) && msg.content === "!mine") {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
-			msg.channel.send(replySender(msg.author.id))
+			msg.channel.send(replySender(msg.author.id, msg.author.username))
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
