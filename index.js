@@ -370,7 +370,8 @@ function answerTruth()
 	`If this is true, then hoishin has stopped being a weeb ${emoji}`,
 	`Of course! Roosta can confirm it from the top of his bike! ${emoji}`,
 	`The answer is written deep inside Kyö's inner tattoos ${emoji}`,
-	`Yes, that's right! Seth and Qaz even made emotes about it ${emoji}`
+	`Yes, that's right! Seth and Qaz even made emotes about it ${emoji}`,
+	`Hum... That will happen the day Harvey will not be underage anymore ${emoji}`
 	]
 	return truths[Math.floor(Math.random() * truths.length)];
 }
