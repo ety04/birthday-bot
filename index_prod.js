@@ -353,6 +353,29 @@ function getBirthday(next) {
 }
 
 /**
+ * -----> answerTruth
+ * Replies with the true genuine answer!
+ * @param {void}
+ * @return {String} 				 : message to send to the channel
+ */
+function answerTruth()
+{
+	const truths = [
+	`Well,  I don't know. Maybe. Who knows? ${emoji}`,
+	`Absolutely. Couldn't have said it any better! ${emoji}`,
+	`Not at all. That's highly unlikely ${emoji}`,
+	`I have to ask soloman but it seems exactly the case ${emoji}`,
+	`Probably not. Try again ${emoji}`,
+	`... As sure as zer0 can keep an Any% WR for more than 24 hours ${emoji}`,
+	`If this is true, then hoishin has stopped being a weeb ${emoji}`,
+	`Of course! Roosta can confirm it from the top of his bike! ${emoji}`,
+	`The answer is written deep inside Kyö's inner tattoos ${emoji}`,
+	`Yes, that's right! Seth and Qaz even made emotes about it ${emoji}`
+	]
+	return truths[Math.floor(Math.random() * truths.length)];
+}
+
+/**
  * -----> atMention
  * Says a message when the bot is mentioned
  * @param {void}
@@ -451,6 +474,10 @@ bot.on("message", function (msg) {
 		if (checkChannels(msg) && msg.content === "!mine") {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
 			msg.channel.send(replySender(msg.author.id))
+		}
+		// ask Bbot about anything!
+		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
+			msg.channel.send(answerTruth())
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
