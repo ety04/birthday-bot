@@ -486,8 +486,9 @@ bot.on("message", function (msg) {
 });
 
 // When a new member joins the server
-bot.on("guildMemberAdd", function (guild, member) {
+bot.on('guildMemberAdd',  member => {
 		let w = guild.owner.user.username;
+		console.log('New joiner in the party - ' + member.user.username);
 		welcomeChannel.send(`Welcome ${member.user.username} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
