@@ -323,6 +323,26 @@ function randomWish(u)
 }
 
 /**
+ * -----> frFeel
+ * Returns a French feeling!
+ * @param {void} 
+ * @return {String} 				 : a very special French surprise
+ */
+function frFeel()
+{
+	const feel = [
+	`croissant ${emoji} \n http://www.marmiton.org/recettes/recette_croissants-au-beurre_16097.aspx`
+	`baguette ${emoji} \n http://www.marmiton.org/recettes/recette_baguette-maison_48781.aspx`
+	`choucroute ${emoji} \n http://www.marmiton.org/recettes/recette_choucroute_20312.aspx`
+	`tropézienne ${emoji} \n http://www.marmiton.org/recettes/recette_tarte-tropezienne-a-la-fleur-d-oranger_92700.aspx`
+	`quiche ${emoji} \n http://www.marmiton.org/recettes/recette_quiche-provencale_13393.aspx`
+	`pot-au-feu ${emoji} \n http://www.marmiton.org/recettes/recette_pot-au-feu-a-l-autocuiseur_20533.aspx`
+	`Bourguignon beef ${emoji} \n http://www.marmiton.org/recettes/recette_boeuf-bourguignon-simple_13320.aspx`
+	];
+	return feel[Math.floor(Math.random() * feel.length)]
+}
+
+/**
  * -----> getBirthday
  * Returns the past or next birthday of the members
  * @param {boolean} next : true if we want next birthday; false if we want past birthday
@@ -479,6 +499,10 @@ bot.on("message", function (msg) {
 		// ask Bbot about anything!
 		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
 			msg.channel.send(answerTruth())
+		}
+		// ask Bbot about a French surprise
+		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("abot")) {
+			msg.channel.send(frFeel())
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
