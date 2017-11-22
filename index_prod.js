@@ -331,13 +331,14 @@ function randomWish(u)
 function frFeel()
 {
 	const feel = [
-	`croissant ${emoji} \n http://www.marmiton.org/recettes/recette_croissants-au-beurre_16097.aspx`
-	`baguette ${emoji} \n http://www.marmiton.org/recettes/recette_baguette-maison_48781.aspx`
-	`choucroute ${emoji} \n http://www.marmiton.org/recettes/recette_choucroute_20312.aspx`
-	`tropézienne ${emoji} \n http://www.marmiton.org/recettes/recette_tarte-tropezienne-a-la-fleur-d-oranger_92700.aspx`
-	`quiche ${emoji} \n http://www.marmiton.org/recettes/recette_quiche-provencale_13393.aspx`
-	`pot-au-feu ${emoji} \n http://www.marmiton.org/recettes/recette_pot-au-feu-a-l-autocuiseur_20533.aspx`
-	`Bourguignon beef ${emoji} \n http://www.marmiton.org/recettes/recette_boeuf-bourguignon-simple_13320.aspx`
+	`croissant ${emoji} \n http://www.marmiton.org/recettes/recette_croissants-au-beurre_16097.aspx`,
+	`baguette ${emoji} \n http://www.marmiton.org/recettes/recette_baguette-maison_48781.aspx`,
+	`choucroute ${emoji} \n http://www.marmiton.org/recettes/recette_choucroute_20312.aspx`,
+	`tropézienne ${emoji} \n http://www.marmiton.org/recettes/recette_tarte-tropezienne-a-la-fleur-d-oranger_92700.aspx`,
+	`quiche ${emoji} \n http://www.marmiton.org/recettes/recette_quiche-provencale_13393.aspx`,
+	`pot-au-feu ${emoji} \n http://www.marmiton.org/recettes/recette_pot-au-feu-a-l-autocuiseur_20533.aspx`,
+	`Bourguignon beef ${emoji} \n http://www.marmiton.org/recettes/recette_boeuf-bourguignon-simple_13320.aspx`,
+	`moules frites ${emoji} \n http://www.marmiton.org/recettes/recette_moule-frites-biere-veritable-recette-ch-ti_69535.aspx`
 	];
 	return feel[Math.floor(Math.random() * feel.length)]
 }
