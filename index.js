@@ -14,7 +14,7 @@
  * ---------------------------- */
 
 /** -------------------- IMPORTS ----------------------- */
-   
+ 
 // Import the discord.js module
 const Discord = require('discord.js')
 
@@ -24,6 +24,7 @@ const Table = require('easy-table')
 // Import the systime module
 const Systime = require('systime')
 
+const sJoke = require('scrape_joke')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
@@ -425,13 +426,13 @@ function atMention()
 
 /**
  * -----> checkChannels
- * Checks if the message has been sent either in #random_talk or #test
+ * Checks if the message has been sent either in #test
  * @param {Message}	 msg	 : the message to check
- * @return {boolean} 				 : if the message has been sent in the approved channels
+ * @return {boolean} 				 : if the message has been sent in the approved channel
  */
 function checkChannels(msg)
 {
-	return (msg.channel === welcomeChannel) || (msg.channel == testChannel);
+	return (msg.channel == testChannel);
 }
 
 /** -------------------- TIME EVENTS ----------------------- */
@@ -496,6 +497,11 @@ bot.on("message", function (msg) {
 		if (checkChannels(msg) && msg.content === "!mine") {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
 			msg.channel.send(replySender(msg.author.id))
+		}
+		// ask for sender's birthday
+		if (checkChannels(msg) && msg.content === "!joke") {
+			let j = new sJoke();
+			msg.channel.send(`Here is your joke: ${j.aJoke()}`)
 		}
 		// ask Bbot about anything!
 		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
