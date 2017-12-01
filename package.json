@@ -10,8 +10,10 @@
   "author": "Ety",
   "license": "LGPL-3.0",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "discord.js": "^11.2.1",
     "easy-table": "^1.1.0",
+    "request": "^2.83.0",
     "systime": "^1.0.0"
   }
 }
