@@ -501,7 +501,12 @@ bot.on("message", function (msg) {
 		// ask for sender's birthday
 		if (checkChannels(msg) && msg.content === "!joke") {
 			let j = new sJoke();
-			msg.channel.send(`Here is your joke: ${j.aJoke()}`)
+			let text_content = j.aJoke();
+			if(text_content === null)
+				console.log("The text received is null");
+			else
+				console.log("The text received is NOT null");
+			msg.channel.send(`Here is your joke: ${text_content}`);
 		}
 		// ask Bbot about anything!
 		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
