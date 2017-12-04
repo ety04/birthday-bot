@@ -11,9 +11,11 @@
   "license": "LGPL-3.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "cheerio-select": "0.0.3",
     "discord.js": "^11.2.1",
     "easy-table": "^1.1.0",
     "request": "^2.83.0",
+    "superscraper": "0.0.1",
     "systime": "^1.0.0"
   }
 }

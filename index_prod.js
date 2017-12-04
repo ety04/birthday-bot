@@ -67,6 +67,7 @@ const botID = "308973156578885632";
 var t = new Table
 var time = new Systime()
 
+var j = false;
 
 /** -------------------- INTERNAL FUNCTIONS ----------------------- */
   
@@ -419,8 +420,38 @@ function atMention()
 	"a Gaia hat",
 	"a joke"
 	];
-	let word = needs[Math.floor(Math.random() * needs.length)];
+	let index = Math.floor(Math.random() * needs.length);
+	let word = needs[index];
+	if(word === "a joke")
+		j = true;  	// joke mode activated
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
+}
+
+/**
+ * -----> sendJoke
+ * Sends a joke to the channel of the request message
+ * @param {Message}	 msg	 : the message to check
+ * @return {void}
+ */
+function sendJoke(msg)
+{
+	try
+	{
+		var call = new Promise( (resolve, reject) =>
+		{
+			resolve(sJoke());
+		});
+	}
+	catch(err)
+	{
+		console.log("Error while joking: " + err);
+	}
+	call.then( (res) => {
+		msg.channel.send(`Here is your joke: ${res}`);
+	})
+		.catch( (err) => {
+		console.log("Error sending the joke: " + err);
+	});
 }
 
 /**
@@ -431,6 +462,7 @@ function atMention()
  */
 function checkChannels(msg)
 {
+	j = false;
 	return (msg.channel === welcomeChannel) || (msg.channel == testChannel);
 }
 
@@ -440,11 +472,12 @@ function checkChannels(msg)
 	var u = bot.users.get("118150122893737991");
 	welcomeChannel.send(randomWish(u));
 })*/
+
 // Daily notice
-/*time.on('day', () =>
+time.on('day', () =>
 	checkToday(welcomeChannel, true)
 )
-*/
+
 
 /** -------------------- DISCORD EVENTS ----------------------- */
  // Gets called when our bot is successfully logged in and connected
@@ -497,6 +530,14 @@ bot.on("message", function (msg) {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
 			msg.channel.send(replySender(msg.author.id))
 		}
+		// send a joke
+		if (checkChannels(msg) && msg.content === "!joke") {
+			sendJoke(msg);
+		}
+		// send a joke after a summon
+		if (j && checkChannels(msg) && msg.content.toLowerCase().startsWith("yes")) {
+			sendJoke(msg);
+		}
 		// ask Bbot about anything!
 		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
 			msg.channel.send(answerTruth())
@@ -512,9 +553,11 @@ bot.on("message", function (msg) {
 
 // When a new member joins the server
 bot.on('guildMemberAdd',  member => {
-		let w = guild.owner.user.username;
-		console.log('New joiner in the party - ' + member.user.username);
-		welcomeChannel.send(`Welcome ${member.user.username} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
+		let g = member.guild;
+		let w = g.owner.user.username;
+		let u = member.user.username;
+		console.log('New joiner in the party - ' + u);
+		welcomeChannel.send(`Welcome ${u} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
  
