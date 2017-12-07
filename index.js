@@ -433,7 +433,7 @@ function atMention()
  * -----> sendJoke
  * Sends a joke to the channel of the request message
  * @param {Message}	 msg	 : the message to check
- * @return {void}
+ * @resolve {sJoke}					 : the joke content
  */
 function sendJoke(msg)
 {
@@ -505,48 +505,50 @@ bot.on('ready', () => {
  // This code will run once the bot receives any message.
 bot.on("message", function (msg) {
 		// if message begins with "ping"
-		if (checkChannels(msg) && msg.content.indexOf("ping") === 0) {
+		if (msg.content.indexOf("ping") === 0 && checkChannels(msg)) {
 		// send a message to the channel the ping message was sent in.
 		msg.channel.send("pong!");
 		// alert the console
 		console.log("pong-ed " + msg.author.username);
 		}
 		// ask for last birthday
-		if (checkChannels(msg) && msg.content === "!birthday") {
+		if (msg.content === "!birthday" && checkChannels(msg)) {
 			msg.channel.send(getBirthday(false)) ;
 		}
 		// ask for next birthday
-		if (checkChannels(msg) && msg.content === "!next") {
+		if (msg.content === "!next" && checkChannels(msg)) {
 			msg.channel.send(getBirthday(true)) ;
 		}
 		// date reminder
-		if (checkChannels(msg) && msg.content.startsWith("!date")) {
+		if ( msg.content.startsWith("!date") && checkChannels(msg)) {
 			var today = new Date();
 			msg.channel.send(`I never liked you but soloman told me to make an exception so here is the date: ${today} ${emoji}`);
 		}
 		// ask for today's birthdays
-		if (checkChannels(msg) && msg.content === "!today") {
+		if (msg.content === "!today" && checkChannels(msg)) {
 			checkToday(msg.channel, false)
 		}
 		// ask for sender's birthday
-		if (checkChannels(msg) && msg.content === "!mine") {
+		if (msg.content === "!mine" && checkChannels(msg)) {
 			//msg.channel.send(`Are you seriously asking for your own birthday? Pls ${msg.author.username}.`)
 			msg.channel.send(replySender(msg.author.id))
 		}
 		// send a joke
-		if (checkChannels(msg) && msg.content === "!joke") {
+		if (msg.content === "!joke" && checkChannels(msg)) {
 			sendJoke(msg);
 		}
 		// send a joke after a summon
-		if (j && checkChannels(msg) && msg.content.toLowerCase().startsWith("yes")) {
-			sendJoke(msg);
+		if (j) {
+			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
+				sendJoke(msg);
+			}
 		}
 		// ask Bbot about anything!
-		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("bbot")) {
+		if (msg.content.toLowerCase().startsWith("bbot") && checkChannels(msg)) {
 			msg.channel.send(answerTruth())
 		}
 		// ask Bbot about a French surprise
-		if (checkChannels(msg) && msg.content.toLowerCase().startsWith("abot")) {
+		if (msg.content.toLowerCase().startsWith("abot") && checkChannels(msg)) {
 			msg.channel.send(frFeel())
 		}
 		// answer to mention
