@@ -24,6 +24,7 @@ const Table = require('easy-table')
 // Import the systime module
 const Systime = require('systime')
 
+// Import the funniest module
 const sJoke = require('scrape_joke')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
@@ -428,7 +429,6 @@ function atMention()
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
-
 /**
  * -----> sendJoke
  * Sends a joke to the channel of the request message
@@ -469,13 +469,13 @@ function checkChannels(msg)
 }
 
 
-
 /** -------------------- TIME EVENTS ----------------------- */
 // Timer strats
 /* time.on('second', () => {
 	var u = bot.users.get("118150122893737991");
 	welcomeChannel.send(randomWish(u));
 })*/
+
 // Daily notice
 time.on('day', () =>
 	checkToday(welcomeChannel, true)

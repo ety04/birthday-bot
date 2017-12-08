@@ -24,6 +24,8 @@ const Table = require('easy-table')
 // Import the systime module
 const Systime = require('systime')
 
+// Import the funniest module
+const sJoke = require('scrape_joke')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
@@ -465,6 +467,7 @@ function checkChannels(msg)
 	j = false;
 	return (msg.channel === welcomeChannel) || (msg.channel == testChannel);
 }
+
 
 /** -------------------- TIME EVENTS ----------------------- */
 // Timer strats
