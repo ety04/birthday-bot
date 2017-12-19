@@ -37,34 +37,34 @@ const token = 'lol2017'
 
 // channel used
 var welcomeChannel, testChannel;
-const testing = "308968674721792002";
-const random_talk = "232478667891015680";
+const testing = "t";
+const random_talk = "rt";
 
 // very important emoji
 var emoji;
 
 // Birthday data
 const data = [
-  //{ id: "118150122893737991", birth: 'today'},// Qazplm		// false
-  { id: "159600065017675778", birth: '11/02'},	// Hoishin		// false
-  { id: "112623145852080128", birth: '11/02'},	// Harvey
-  { id: "107164123388735488", birth: '27/03'},	// Eden (and Flobber)
-  { id: "113723104286605319", birth: '29/04'},	// Roosta
-  { id: "193150846291279881", birth: '02/06'},	// Seth
-  { id: "210538981509562391", birth: '05/06'},	// Deedlit
-  { id: "84128419964551168",  birth: '06/07' },	// AlecK
-  { id: "212699799730913281", birth: '15/07' },	// Ety
-  { id: "113727842692497410", birth: '19/07'},	// Leo
-  { id: "154809485116964864", birth: '12/08'},	// Kyos
-  { id: "118150122893737991", birth: '24/08'},	// Qazplm		// false
-  { id: "190204168257011712", birth: '16/09'},	// Bébert
-  { id: "314797224695693314", birth: '03/10'},	// Blue
-  { id: "105135372484243456", birth: '15/11'},	// Coughchamp
-  { id: "142722101961424896", birth: '24/11'},	// zer0skar
-  { id: "111531606535077888", birth: '27/12'}	// Swordy
+  //{ id: "m", birth: 'today'},// Qazplm		// false
+  { id: "m", birth: '11/02'},	// Hoishin		// false
+  { id: "m", birth: '11/02'},	// Harvey
+  { id: "m", birth: '27/03'},	// Eden (and Flobber)
+  { id: "m", birth: '29/04'},	// Roosta
+  { id: "m", birth: '02/06'},	// Seth
+  { id: "m", birth: '05/06'},	// Deedlit
+  { id: "m",  birth: '06/07' },	// AlecK
+  { id: "m", birth: '15/07' },	// Ety
+  { id: "m", birth: '19/07'},	// Leo
+  { id: "m", birth: '12/08'},	// Kyos
+  { id: "m", birth: '24/08'},	// Qazplm		// false
+  { id: "m", birth: '16/09'},	// Bébert
+  { id: "m", birth: '03/10'},	// Blue
+  { id: "m", birth: '15/11'},	// Coughchamp
+  { id: "m", birth: '24/11'},	// zer0skar
+  { id: "m", birth: '27/12'}	// Swordy
 ]
 
-const botID = "308973156578885632";
+const botID = "b";
 
 var t = new Table
 var time = new Systime()
