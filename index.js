@@ -33,38 +33,40 @@ const sJoke = require('scrape_joke')
 const bot = new Discord.Client();
 
 // Token for the bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
-const token = 'MzA4OTczMTU2NTc4ODg1NjMy.C-zYYw.i5kCT8X6Q0h76Oh85zNAEsE1WTE'
+const token = 'lol'
 
 // channel used
 var welcomeChannel, testChannel;
-const testing = "308968674721792002";
-const random_talk = "232478667891015680";
+const testing = "t";
+const random_talk = "rt";
 
 // very important emoji
 var emoji;
 
 // Birthday data
 const data = [
-  //{ id: "118150122893737991", birth: 'today'},// Qazplm		// false
-  { id: "159600065017675778", birth: '11/02'},	// Hoishin		// false
-  { id: "112623145852080128", birth: '11/02'},	// Harvey
-  { id: "107164123388735488", birth: '27/03'},	// Eden (and Flobber)
-  { id: "113723104286605319", birth: '29/04'},	// Roosta
-  { id: "193150846291279881", birth: '02/06'},	// Seth
-  { id: "210538981509562391", birth: '05/06'},	// Deedlit
-  { id: "84128419964551168",  birth: '06/07' },	// AlecK
-  { id: "212699799730913281", birth: '15/07' },	// Ety
-  { id: "113727842692497410", birth: '19/07'},	// Leo
-  { id: "154809485116964864", birth: '12/08'},	// Kyos
-  { id: "118150122893737991", birth: '24/08'},	// Qazplm		// false
-  { id: "190204168257011712", birth: '16/09'},	// Bébert
-  { id: "314797224695693314", birth: '03/10'},	// Blue
-  { id: "105135372484243456", birth: '15/11'},	// Coughchamp
-  { id: "142722101961424896", birth: '24/11'},	// zer0skar
-  { id: "111531606535077888", birth: '27/12'}	// Swordy
+  //{ id: "m", birth: 'today'},// Qazplm		// false
+  { id: "m", birth: '11/02'},	// Hoishin		// false
+  { id: "m", birth: '11/02'},	// Harvey
+  { id: "m", birth: '27/03'},	// Eden (and Flobber)
+  { id: "m", birth: '29/04'},	// Roosta
+  { id: "m", birth: '02/06'},	// Seth
+  { id: "m", birth: '05/06'},	// Deedlit
+  { id: "m", birth: '11/06'},	// Suga
+  { id: "m", birth: '15/06'},	// Vinny
+  { id: "m",  birth: '06/07' },	// AlecK
+  { id: "m", birth: '15/07' },	// Ety
+  { id: "m", birth: '19/07'},	// Leo
+  { id: "m", birth: '12/08'},	// Kyos
+  { id: "m", birth: '24/08'},	// Qazplm		// false
+  { id: "m", birth: '16/09'},	// Bébert
+  { id: "m", birth: '03/10'},	// Blue
+  { id: "m", birth: '15/11'},	// Coughchamp
+  { id: "m", birth: '24/11'},	// zer0skar
+  { id: "m", birth: '27/12'}	// Swordy
 ]
 
-const botID = "308973156578885632";
+const botID = "b";
 
 var t = new Table
 var time = new Systime()
@@ -390,7 +392,7 @@ function answerTruth()
 	`Not at all. That's highly unlikely ${emoji}`,
 	`I have to ask soloman but it seems exactly the case ${emoji}`,
 	`Probably not. Try again ${emoji}`,
-	`... As sure as zer0 can keep an Any% WR for more than 24 hours ${emoji}`,
+	`... As sure as zer0 can now keep an Any% WR for more than 24 hours ${emoji}`,
 	`If this is true, then hoishin has stopped being a weeb ${emoji}`,
 	`Of course! Roosta can confirm it from the top of his bike! ${emoji}`,
 	`The answer is written deep inside Kyö's inner tattoos ${emoji}`,
@@ -426,6 +428,8 @@ function atMention()
 	let word = needs[index];
 	if(word === "a joke")
 		j = true;  	// joke mode activated
+	if(word === "a ceremony")
+		c = true;  	// ceremony mode activated
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
@@ -457,6 +461,96 @@ function sendJoke(msg)
 }
 
 /**
+ * -----> sendCeremony
+ * Sends a ceremony to the channel of the request message
+ * @param {Message}	 msg	 : the message to check
+ * @return {void}
+ */
+function sendCeremony(msg, user)
+{
+	var mabrouk = "Let us celebrate the ";
+	var un1 = "";		// ID of the first user concerned by the ceremony
+	var zhar = 0.5;	// We give the caller of the command a fair chance
+	
+	un1 = selectRandomUser(zhar, user.id, "");
+	var us1 = bot.users.get(un1);
+	
+	const feasts = [
+	"birth",
+	"marriage",
+	 "reincarnation",
+	 "graduation",
+	 "new job",
+	 "house-warming",
+	 "coronation",
+	 "victory",
+	 "retirement",
+	 "burial"
+	];
+	let index1 = Math.floor(Math.random() * feasts.length);
+	let word = feasts[index1];
+	mabrouk2 = word + " of " + us1.username; 
+	mabrouk += mabrouk2;
+	if(word == "marriage")
+	{
+		var un2 = selectRandomUser(zhar, user.id, un1);
+		var us2 = bot.users.get(un2);
+		mabrouk += " and " + us2.username + ". Yipee!"
+	}
+	
+		msg.channel.send(mabrouk + `${emoji}`);
+}
+
+/**
+ * -----> selectRandomUser
+ * Selects a random user, with the caller having a higher weight, eliminating someone or not from the results
+ * @param {Message}	 weight			 : the weight of the caller
+ * @param {Message}	 caller			 : the caller's user ID
+ * @param {Message}	 eliminated	 : an already selected user's ID
+ * @return {String}		 ID					 : the ID of the selected user
+ */
+function selectRandomUser(weight, caller, eliminated)
+{
+	var user = "";
+	var len = data.length;
+	var table_zhar = [];
+	
+	var i=0;
+	data.forEach(function(element) {
+	 if(element.id === caller)
+		table_zhar[i] = weight;
+	else
+		table_zhar[i] = (1 - weight) / (len - 1);
+	i++;
+	})
+	
+	var index = len;
+	var chance = Math.random();
+	var sum=0;
+	for(t in table_zhar)
+	{
+		sum += table_zhar[t];
+		if(chance <= sum)
+		{
+			index = t;
+			break;
+		}
+	}
+	
+	i=0;
+	data.forEach(function(element) {
+	  if(i == index)
+		user = element.id;
+	i++;
+	})
+	
+	if(user === eliminated)
+		return selectRandomUser(weight, caller, eliminated)
+		
+	return user;
+}
+
+/**
  * -----> checkChannels
  * Checks if the message has been sent either in #test
  * @param {Message}	 msg	 : the message to check
@@ -465,6 +559,7 @@ function sendJoke(msg)
 function checkChannels(msg)
 {
 	j = false;
+	c = false;
 	return (msg.channel === testChannel);
 }
 
@@ -537,10 +632,20 @@ bot.on("message", function (msg) {
 		if (msg.content === "!joke" && checkChannels(msg)) {
 			sendJoke(msg);
 		}
+		// send a ceremony
+		if (msg.content === "!ceremony" && checkChannels(msg)) {
+			sendCeremony(msg, msg.author);
+		}
 		// send a joke after a summon
 		if (j) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
 				sendJoke(msg);
+			}
+		}
+		// send a ceremony after a summon
+		if (c) {
+			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
+				sendCeremony(msg, msg.author);
 			}
 		}
 		// ask Bbot about anything!
