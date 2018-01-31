@@ -33,12 +33,12 @@ const sJoke = require('scrape_joke')
 const bot = new Discord.Client();
 
 // Token for the bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
-const token = 'lol2017'
+const token = process.env.TK_BD_BOT;
 
 // channel used
 var welcomeChannel, testChannel;
-const testing = "t";
-const random_talk = "rt";
+const testing = process.env.TST_CN;
+const random_talk = process.env.RDM_CN;
 
 // very important emoji
 var emoji;
@@ -46,27 +46,27 @@ var emoji;
 // Birthday data
 const data = [
   //{ id: "m", birth: 'today'},// Qazplm		// false
-  { id: "m", birth: '11/02'},	// Hoishin		// false
-  { id: "m", birth: '11/02'},	// Harvey
-  { id: "m", birth: '27/03'},	// Eden (and Flobber)
-  { id: "m", birth: '29/04'},	// Roosta
-  { id: "m", birth: '02/06'},	// Seth
-  { id: "m", birth: '05/06'},	// Deedlit
-  { id: "m", birth: '11/06'},	// Suga
-  { id: "m", birth: '15/06'},	// Vinny
-  { id: "m",  birth: '06/07' },	// AlecK
-  { id: "m", birth: '15/07' },	// Ety
-  { id: "m", birth: '19/07'},	// Leo
-  { id: "m", birth: '12/08'},	// Kyos
-  { id: "m", birth: '24/08'},	// Qazplm		// false
-  { id: "m", birth: '16/09'},	// Bébert
-  { id: "m", birth: '03/10'},	// Blue
-  { id: "m", birth: '15/11'},	// Coughchamp
-  { id: "m", birth: '24/11'},	// zer0skar
-  { id: "m", birth: '27/12'}	// Swordy
+  { id: process.env.MB_1 , birth: '11/02'},	// Hoishin		// false
+  { id: process.env.MB_2 , birth: '11/02'},	// Harvey
+  { id: process.env.MB_3 , birth: '27/03'},	// Eden (and Flobber)
+  { id: process.env.MB_4 , birth: '29/04'},	// Roosta
+  { id: process.env.MB_5 , birth: '02/06'},	// Seth
+  { id: process.env.MB_6 , birth: '05/06'},	// Deedlit
+  { id: process.env.MB_7 , birth: '11/06'},	// Suga
+  { id: process.env.MB_8 , birth: '15/06'},	// Vinny
+  { id: process.env.MB_9 ,  birth: '06/07' },	// AlecK
+  { id: process.env.MB_10, birth: '15/07' },	// Ety
+  { id: process.env.MB_11, birth: '19/07'},	// Leo
+  { id: process.env.MB_12, birth: '12/08'},	// Kyos
+  { id: process.env.MB_13, birth: '24/08'},	// Qazplm		// false
+  { id: process.env.MB_14, birth: '16/09'},	// Bébert
+  { id: process.env.MB_15, birth: '03/10'},	// Blue
+  { id: process.env.MB_16, birth: '15/11'},	// Coughchamp
+  { id: process.env.MB_17, birth: '24/11'},	// zer0skar
+  { id: process.env.MB_18, birth: '27/12'}	// Swordy
 ]
 
-const botID = "b";
+const botID = process.env.ID_BD_BOT;
 
 var t = new Table
 var time = new Systime()
