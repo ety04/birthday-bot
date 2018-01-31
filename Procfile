@@ -1,1 +1,1 @@
-web: node index_prod.js -p $PORT
+worker: node index_prod.js
