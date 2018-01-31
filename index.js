@@ -33,7 +33,7 @@ const sJoke = require('scrape_joke')
 const bot = new Discord.Client();
 
 // Token for the bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
-const token = 'lol'
+const token = 'lol2017'
 
 // channel used
 var welcomeChannel, testChannel;
