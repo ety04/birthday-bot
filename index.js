@@ -15,6 +15,9 @@
 
 /** -------------------- IMPORTS ----------------------- */
  
+// Because we don't want relics to die
+ require('newrelic');
+ 
 // Import the discord.js module
 const Discord = require('discord.js')
 
