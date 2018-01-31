@@ -1,1 +1,1 @@
-web: node index_prod.js
+web: node index_prod.js -p $PORT
