@@ -1,1 +1,1 @@
-worker: node index_prod.js
+worker: node index.js

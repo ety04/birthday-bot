@@ -679,8 +679,6 @@ bot.on('guildMemberAdd',  member => {
  bot.login(token);
  
  
- // link for this bot to join the server: https://discordapp.com/oauth2/authorize?client_id=308973156578885632&scope=bot
- 
  /* ---------------------------------------------------------------- *
 *  End of life... I mean End of file FeelsBirthdayMan
  * ----------------------------------------------------------------- */

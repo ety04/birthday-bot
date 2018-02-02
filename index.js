@@ -636,8 +636,20 @@ bot.on("message", function (msg) {
 			sendJoke(msg);
 		}
 		// send a ceremony
-		if (msg.content === "!ceremony" && checkChannels(msg)) {
-			sendCeremony(msg, msg.author);
+		if (msg.content.indexOf("ceremony") === 0 && checkChannels(msg)) {
+			if (msg.content === "!ceremony")
+				sendCeremony(msg, msg.author);
+			else
+			{
+				var line = msg.content.split(' ');
+				var arg1 = line.shift();
+				var arg2 = line.shift();
+				if(arg1 === "!ceremony" && arg2 != "")
+				{
+					var u = msg.mentions.members.first(); // get the user mentioned with Ceremony
+					sendCeremony(msg, u);							// send them a Ceremony!
+				}
+			}
 		}
 		// send a joke after a summon
 		if (j) {
@@ -677,8 +689,6 @@ bot.on('guildMemberAdd',  member => {
 /** -------------------- LET'S GOOOOOOOOO ----------------------- */
  bot.login(token);
  
- 
- // link for this bot to join the server: https://discordapp.com/oauth2/authorize?client_id=308973156578885632&scope=bot
  
  /* ---------------------------------------------------------------- *
 *  End of life... I mean End of file FeelsBirthdayMan
