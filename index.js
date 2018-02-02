@@ -636,8 +636,8 @@ bot.on("message", function (msg) {
 			sendJoke(msg);
 		}
 		// send a ceremony
-		if (msg.content.indexOf("ceremony") === 0 && checkChannels(msg)) {
-			if (msg.content === "!ceremony")
+		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {
+			if (msg.content === "!ceremony")	// exactly
 				sendCeremony(msg, msg.author);
 			else
 			{
