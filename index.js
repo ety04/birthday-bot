@@ -471,10 +471,11 @@ function sendJoke(msg)
  */
 function sendCeremony(msg, user)
 {
+	var selectedUser = (user === "")?false:true;
 	var mabrouk = "Let us celebrate the ";
 	var un1 = "";		// ID of the first user concerned by the ceremony
-	var zhar = (user === "")?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
-	user = (user === "")?msg.author:user;
+	var zhar = (selectedUser === false)?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
+	user = (selectedUser === false)?msg.author:user;
 	
 	un1 = selectRandomUser(zhar, user.id, "");
 	var us1 = bot.users.get(un1);
@@ -497,6 +498,8 @@ function sendCeremony(msg, user)
 	mabrouk += mabrouk2;
 	if(word == "marriage")
 	{
+		 if(selectedUser === true)
+			zhar = 0; // the first user has automatically been chosen as the parameter, so let's change
 		var un2 = selectRandomUser(zhar, user.id, un1);
 		var us2 = bot.users.get(un2);
 		mabrouk += " and " + us2.username + ". Yipee!"
