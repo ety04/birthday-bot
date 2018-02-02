@@ -16,7 +16,7 @@
 /** -------------------- IMPORTS ----------------------- */
  
 // Because we don't want relics to die
- require('newrelic');
+require('newrelic');
  
 // Import the discord.js module
 const Discord = require('discord.js')
@@ -639,8 +639,8 @@ bot.on("message", function (msg) {
 		// send a ceremony
 		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {
 			if (msg.content === "!ceremony")	// exactly
-				sendCeremony(msg, msg.author);
-			else
+				sendCeremony(msg, "");
+			else																// beginning with
 			{
 				var line = msg.content.split(' ');
 				var arg1 = line.shift();
