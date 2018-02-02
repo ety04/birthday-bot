@@ -473,7 +473,8 @@ function sendCeremony(msg, user)
 {
 	var mabrouk = "Let us celebrate the ";
 	var un1 = "";		// ID of the first user concerned by the ceremony
-	var zhar = 0.5;	// We give the caller of the command a fair chance
+	var zhar = (user === "")?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
+	user = (user === "")?msg.author:user;
 	
 	un1 = selectRandomUser(zhar, user.id, "");
 	var us1 = bot.users.get(un1);
