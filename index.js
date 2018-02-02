@@ -760,7 +760,7 @@ bot.on("message", function (msg) {
 				sendCeremony(msg, "");
 			}
 		}
-		// send a ceremony after a summon
+		// send a surprise after a summon
 		if (s) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
 				sendSurprise(msg, "");
@@ -782,10 +782,9 @@ bot.on("message", function (msg) {
 // When a new member joins the server
 bot.on('guildMemberAdd',  member => {
 		let g = member.guild;
-		let w = g.owner.user.username;
-		let u = member.user.username;
-		console.log('New joiner in the party - ' + u);
-		welcomeChannel.send(`Welcome ${u} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
+		let w = g.owner;
+		console.log('New joiner in the party - ' + member.user.username);
+		welcomeChannel.send(`Welcome ${member} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
  

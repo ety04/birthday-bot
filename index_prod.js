@@ -76,6 +76,7 @@ var time = new Systime()
 
 var j = false;
 var c = false;
+var s = false;
 
 /** -------------------- INTERNAL FUNCTIONS ----------------------- */
   
@@ -434,6 +435,8 @@ function atMention()
 		j = true;  	// joke mode activated
 	if(word === "a ceremony")
 		c = true;  	// ceremony mode activated
+	if(word === "a surprise")
+		s = true;  	// surprise mode activated
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
@@ -560,14 +563,50 @@ function selectRandomUser(weight, caller, eliminated)
 }
 
 /**
+ * -----> nameFromID
+ * Get username from user's ID in the server
+ * @param {String}	 id			    : the ID of the wanted user
+ * @return {String}	username: the username of that user
+ */
+function nameFromID(id)
+{
+	var user = bot.users.get(id);
+	return user.username;
+}
+
+/**
  * -----> sendSurprise
  * Sends a surprise with special guests
  * @param {Message}	 msg	 : the message to check
+ * @param {Member}	 user	 : the user involved in the surprise, or "" to select it randomly
  * @return {void}
  */
 function sendSurprise(msg, user)
 {
+	var selectedUser = (user === "")?false:true;
 	
+	let chosenUserID = (!selectedUser)?(selectRandomUser(0.5, msg.author.id, "")):(user.id);	
+	let protag = nameFromID(chosenUserID);
+	
+	const actions = [
+	"work out intensely for 3 hours",
+	"go on honeymoon",
+	 "dance the cucaracha",
+	 "have a friendly nap",
+	 "go to a restaurant",
+	 "do a sprint race",
+	 "take a math exam",
+	 "cook a French recipe",
+	 "play Overwatch",
+	 "fly in an airship",
+	 "go hunt Rogue Tomato",
+	 "run errands for Migelo",
+	 "make a Sunstone",
+	 "watch Final Fantasy: The Spirits Within",
+	 "make a plan to steal Pitted's glasses"
+	];
+	let index1 = Math.floor(Math.random() * actions.length);
+	let word1 = actions[index1];
 	
 	const characters = [
 	"Vaan",
@@ -583,12 +622,15 @@ function sendSurprise(msg, user)
 	 "Gabranth",
 	 "Bergan",
 	 "Famfrit",
-	 "Cid 2"
+	 "Cid 2",
+	 "soloman"
 	];
-	let index1 = Math.floor(Math.random() * feasts.length);
-	let word = feasts[index1];
+	let index2 = Math.floor(Math.random() * characters.length);
+	let word2 = characters[index2];
 	
-	msg.channel.send(mabrouk + `${emoji}`);
+	var sentence = "Surprise of the day: " + protag + " will " + word1 + " with " + word2;
+	
+	msg.channel.send(sentence + `${emoji}`);
 }
 
 /**
@@ -601,6 +643,7 @@ function checkChannels(msg)
 {
 	j = false;
 	c = false;
+	s = false;
 	return (msg.channel === welcomeChannel) || (msg.channel == testChannel);
 }
 
@@ -689,6 +732,22 @@ bot.on("message", function (msg) {
 				}
 			}
 		}
+		// send a surprise
+		if (msg.content.indexOf("!surprise") === 0 && checkChannels(msg)) {
+			if (msg.content === "!surprise")	// exactly
+				sendSurprise(msg, "");
+			else																// beginning with
+			{
+				var line = msg.content.split(' ');
+				var arg1 = line.shift();
+				var arg2 = line.shift();
+				if(arg1 === "!surprise" && arg2 != "")
+				{
+					var u = msg.mentions.members.first(); // get the user mentioned with Surprise
+					sendSurprise(msg, u);								// send them a Surprise!
+				}
+			}
+		}
 		// send a joke after a summon
 		if (j) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
@@ -699,6 +758,12 @@ bot.on("message", function (msg) {
 		if (c) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
 				sendCeremony(msg, "");
+			}
+		}
+		// send a surprise after a summon
+		if (s) {
+			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
+				sendSurprise(msg, "");
 			}
 		}
 		// ask Bbot about anything!
@@ -717,10 +782,9 @@ bot.on("message", function (msg) {
 // When a new member joins the server
 bot.on('guildMemberAdd',  member => {
 		let g = member.guild;
-		let w = g.owner.user.username;
-		let u = member.user.username;
-		console.log('New joiner in the party - ' + u);
-		welcomeChannel.send(`Welcome ${u} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
+		let w = g.owner;
+		console.log('New joiner in the party - ' + member.user.username);
+		welcomeChannel.send(`Welcome ${member} ! To be fully part of the adventure, don\'t forget to message ${w} with your birthday date ${emoji}`);
 });
  
  
