@@ -585,8 +585,8 @@ function sendSurprise(msg, user)
 {
 	var selectedUser = (user === "")?false:true;
 	
-	let chosenUserID = (!selectedUser)?selectRandomUser(0.5, msg.author.id, ""):user.id;	
-	const protag = nameFromID(chosenUserID);
+	let chosenUserID = (!selectedUser)?(selectRandomUser(0.5, msg.author.id, "")):(user.id);	
+	let protag = nameFromID(chosenUserID);
 	
 	const actions = [
 	"work out intensely for 3 hours",
@@ -741,7 +741,7 @@ bot.on("message", function (msg) {
 				var line = msg.content.split(' ');
 				var arg1 = line.shift();
 				var arg2 = line.shift();
-				if(arg1 === "!susprise" && arg2 != "")
+				if(arg1 === "!surprise" && arg2 != "")
 				{
 					var u = msg.mentions.members.first(); // get the user mentioned with Surprise
 					sendSurprise(msg, u);								// send them a Surprise!
