@@ -468,13 +468,16 @@ function sendJoke(msg)
  * -----> sendCeremony
  * Sends a ceremony to the channel of the request message
  * @param {Message}	 msg	 : the message to check
+ * @param {Message}	 user	 : a specific user for the ceremony, or ""
  * @return {void}
  */
 function sendCeremony(msg, user)
 {
+	var selectedUser = (user === "")?false:true;
 	var mabrouk = "Let us celebrate the ";
 	var un1 = "";		// ID of the first user concerned by the ceremony
-	var zhar = 0.5;	// We give the caller of the command a fair chance
+	var zhar = (selectedUser === false)?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
+	user = (selectedUser === false)?msg.author:user;
 	
 	un1 = selectRandomUser(zhar, user.id, "");
 	var us1 = bot.users.get(un1);
@@ -497,6 +500,8 @@ function sendCeremony(msg, user)
 	mabrouk += mabrouk2;
 	if(word == "marriage")
 	{
+		 if(selectedUser === true)
+			zhar = 0; // the first user has automatically been chosen as the parameter, so let's change
 		var un2 = selectRandomUser(zhar, user.id, un1);
 		var us2 = bot.users.get(un2);
 		mabrouk += " and " + us2.username + ". Yipee!"
@@ -552,6 +557,38 @@ function selectRandomUser(weight, caller, eliminated)
 		return selectRandomUser(weight, caller, eliminated)
 		
 	return user;
+}
+
+/**
+ * -----> sendSurprise
+ * Sends a surprise with special guests
+ * @param {Message}	 msg	 : the message to check
+ * @return {void}
+ */
+function sendSurprise(msg, user)
+{
+	
+	
+	const characters = [
+	"Vaan",
+	"Penelo",
+	 "Ashe",
+	 "Balthier",
+	 "Basch",
+	 "Fran",
+	 "Montblanc",
+	 "Elza",
+	 "Vossler",
+	 "Demon Wall 1",
+	 "Gabranth",
+	 "Bergan",
+	 "Famfrit",
+	 "Cid 2"
+	];
+	let index1 = Math.floor(Math.random() * feasts.length);
+	let word = feasts[index1];
+	
+	msg.channel.send(mabrouk + `${emoji}`);
 }
 
 /**
@@ -637,8 +674,20 @@ bot.on("message", function (msg) {
 			sendJoke(msg);
 		}
 		// send a ceremony
-		if (msg.content === "!ceremony" && checkChannels(msg)) {
-			sendCeremony(msg, msg.author);
+		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {
+			if (msg.content === "!ceremony")	// exactly
+				sendCeremony(msg, "");
+			else																// beginning with
+			{
+				var line = msg.content.split(' ');
+				var arg1 = line.shift();
+				var arg2 = line.shift();
+				if(arg1 === "!ceremony" && arg2 != "")
+				{
+					var u = msg.mentions.members.first(); // get the user mentioned with Ceremony
+					sendCeremony(msg, u);							// send them a Ceremony!
+				}
+			}
 		}
 		// send a joke after a summon
 		if (j) {
@@ -649,7 +698,7 @@ bot.on("message", function (msg) {
 		// send a ceremony after a summon
 		if (c) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
-				sendCeremony(msg, msg.author);
+				sendCeremony(msg, "");
 			}
 		}
 		// ask Bbot about anything!
