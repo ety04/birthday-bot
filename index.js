@@ -602,7 +602,7 @@ function sendSurprise(msg, user)
 	 "go hunt Rogue Tomato",
 	 "run errands for Migelo",
 	 "make a Sunstone",
-	 "watch Final Fantasy: The Spirits Within"
+	 "watch Final Fantasy: The Spirits Within",
 	 "make a plan to steal Pitted's glasses"
 	];
 	let index1 = Math.floor(Math.random() * actions.length);
