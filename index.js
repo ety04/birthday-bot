@@ -667,7 +667,7 @@ time.on('day', () =>
 bot.on('ready', () => {
 	welcomeChannel = bot.channels.get(testing);
 	testChannel = bot.channels.get(testing);
-	botChannel = bot.channels.get(bithday_bot_cn);
+	botChannel = bot.channels.get(birthday_bot_cn);
 	emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBirthdayMan');
 	data.sort(compare)
 	time.start()
