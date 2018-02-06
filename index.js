@@ -39,9 +39,10 @@ const bot = new Discord.Client();
 const token = process.env.TK_BD_BOT;
 
 // channel used
-var welcomeChannel, testChannel;
+var welcomeChannel, testChannel, botChannel;
 const testing = process.env.TST_CN;
 const random_talk = process.env.RDM_CN;
+const birthday_bot_cn = process.env.BBT_CN;
 
 // very important emoji
 var emoji;
@@ -666,6 +667,7 @@ time.on('day', () =>
 bot.on('ready', () => {
 	welcomeChannel = bot.channels.get(testing);
 	testChannel = bot.channels.get(testing);
+	botChannel = bot.channels.get(bithday_bot_cn);
 	emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBirthdayMan');
 	data.sort(compare)
 	time.start()
