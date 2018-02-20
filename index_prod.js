@@ -65,6 +65,7 @@ const data = [
   { id: process.env.MB_13, birth: '24/08'},	// Qazplm		// false
   { id: process.env.MB_14, birth: '16/09'},	// Bébert
   { id: process.env.MB_15, birth: '03/10'},	// Blue
+  { id: process.env.MB_19, birth: '21/10'},	// Nap
   { id: process.env.MB_16, birth: '15/11'},	// Coughchamp
   { id: process.env.MB_17, birth: '24/11'},	// zer0skar
   { id: process.env.MB_18, birth: '27/12'}	// Swordy
