@@ -67,8 +67,7 @@ const data = [
   { id: process.env.MB_15, birth: '03/10'},	// Blue
   { id: process.env.MB_19, birth: '21/10'},	// Nap
   { id: process.env.MB_16, birth: '15/11'},	// Coughchamp
-  { id: process.env.MB_17, birth: '24/11'},	// zer0skar
-  { id: process.env.MB_18, birth: '27/12'}	// Swordy
+  { id: process.env.MB_17, birth: '24/11'}	// zer0skar
 ]
 
 const botID = process.env.ID_BD_BOT;
