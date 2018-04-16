@@ -50,6 +50,7 @@ var emoji;
 // Birthday data
 const data = [
   //{ id: "m", birth: 'today'},// Qazplm		// false
+  { id: process.env.MB_20 , birth: '25/01'},	// Steven
   { id: process.env.MB_1 , birth: '11/02'},	// Hoishin		// false
   { id: process.env.MB_2 , birth: '11/02'},	// Harvey
   { id: process.env.MB_3 , birth: '27/03'},	// Eden (and Flobber)
