@@ -54,6 +54,7 @@ const data = [
   { id: process.env.MB_1 , birth: '11/02'},	// Hoishin		// false
   { id: process.env.MB_2 , birth: '11/02'},	// Harvey
   { id: process.env.MB_3 , birth: '27/03'},	// Eden (and Flobber)
+  { id: process.env.MB_21, birth: '20/04'},	// Cid
   { id: process.env.MB_4 , birth: '29/04'},	// Roosta
   { id: process.env.MB_5 , birth: '02/06'},	// Seth
   { id: process.env.MB_6 , birth: '05/06'},	// Deedlit
