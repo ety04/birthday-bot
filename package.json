@@ -16,6 +16,7 @@
     "easy-table": "^1.1.1",
     "request": "^2.87.0",
     "superscraper": "0.0.1",
-    "systime": "^1.0.0"
+    "systime": "^1.0.0",
+    "ws": "^5.2.0"
   }
 }
