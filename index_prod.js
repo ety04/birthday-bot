@@ -78,6 +78,7 @@ var time = new Systime()
 var j = false;
 var c = false;
 var s = false;
+var d = false;
 
 /** -------------------- INTERNAL FUNCTIONS ----------------------- */
   
@@ -355,6 +356,27 @@ function frFeel()
 }
 
 /**
+ * -----> sendDecoration
+ * Returns a decoration
+ * @param {void} 
+ * @return {String} 				 : a one-of-a-kind decoration
+ */
+function sendDecoration()
+{
+	const dec = [
+	`You found an Australian Christmas tree ! ${emoji} \n https://www.bhg.com.au/cdnstorage/cache/b/3/8/a/e/1/xb38ae1ae465c674caa5fbbd8567448de4f278512.jpg.pagespeed.ic.0ytuMtOdF6.jpg`,
+	`You found a Scandinavian wallpaper ${emoji} \n https://www.izoa.fr/11271-large_default/papier-peint-scandinave-air-de-rien.jpg`,
+	`You found a garden party ! My favorite ${emoji} \n http://www.jolibapteme.com/wp-content/uploads/2016/10/garden-party-bapteme1.jpg`,
+	`You found a beach speech ! Let's listen to Tomaj ${emoji} \n http://online-fakturi.com/wp-content/uploads/2018/04/cool-beach-wedding-decorations-for-sale-40-in-table-ideas-with-cute-decoration-6.jpg`,
+	`You found a Moroccan wedding! Why is Ety hiding ? ${emoji} \n http://www.moroccanpartyrental.com/images/flash5.jpg`,
+	`You found a Japanese room ! Good job Hoishin ${emoji} \n http://web-senryaku.info/wp-content/uploads/2018/05/japanese-decorations-hanging-images-of-yokohama-japan-decorations-like-china-fans-and-lanterns-are-of-japanese-decorations-hanging.jpeg`,
+	`You found a Bollywood scenery ${emoji} \n http://www.parties2weddings.com.au/wp-content/uploads/2016/10/mandapdecore-e1476874534997.jpg`,
+	`You found... a little hut ${emoji} \n https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSck0VgKU-eIhsPBQp8bzzDLkWFgdavfAFeh3xqFhcFp7I8KpLGPQ`
+	];
+	return dec[Math.floor(Math.random() * dec.length)]
+}
+
+/**
  * -----> getBirthday
  * Returns the past or next birthday of the members
  * @param {boolean} next : true if we want next birthday; false if we want past birthday
@@ -438,6 +460,8 @@ function atMention()
 		c = true;  	// ceremony mode activated
 	if(word === "a surprise")
 		s = true;  	// surprise mode activated
+	if(word === "decorations")
+		d = true;   // decorations mode activated
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
@@ -636,7 +660,7 @@ function sendSurprise(msg, user)
 
 /**
  * -----> checkChannels
- * Checks if the message has been sent either in #random_talk or #test
+ * Checks if the message has been sent either in #birthday-bot or #test
  * @param {Message}	 msg	 : the message to check
  * @return {boolean} 				 : if the message has been sent in the approved channels
  */
@@ -645,6 +669,7 @@ function checkChannels(msg)
 	j = false;
 	c = false;
 	s = false;
+	d = false;
 	return (msg.channel === botChannel) || (msg.channel == testChannel);
 }
 
@@ -750,6 +775,10 @@ bot.on("message", function (msg) {
 				}
 			}
 		}
+		// send a decoration
+		if (msg.content.indexOf("!decoration") === 0 && checkChannels(msg)) {
+			msg.channel.send(sendDecoration());
+		}
 		// send a joke after a summon
 		if (j) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
@@ -766,6 +795,12 @@ bot.on("message", function (msg) {
 		if (s) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
 				sendSurprise(msg, "");
+			}
+		}
+		// send a decoration after a summon
+		if (d) {
+			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
+				msg.channel.send(sendDecoration());
 			}
 		}
 		// ask Bbot about anything!
