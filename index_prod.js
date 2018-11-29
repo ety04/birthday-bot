@@ -143,6 +143,7 @@ function isToday(d)
 function isPast(d)
 {
 	const today = new Date();
+	/*
 	if(d.getFullYear() < today.getFullYear())
 		return true;
 	else if(d.getFullYear() === today.getFullYear() && d.getMonth() < today.getMonth())
@@ -151,6 +152,8 @@ function isPast(d)
 		return true;
 	else
 		return false;
+	*/
+	return d < today;
 }
 
 /**
@@ -162,6 +165,7 @@ function isPast(d)
 function isFuture(d)
 {
 	const today = new Date();
+	/*
 	if(d.getFullYear() > today.getFullYear())
 		return true;
 	else if(d.getFullYear() === today.getFullYear() && d.getMonth() > today.getMonth())
@@ -170,6 +174,8 @@ function isFuture(d)
 		return true;
 	else
 		return false;
+	*/
+	return d > today;
 }
 
 /**
@@ -226,7 +232,7 @@ function sendHappyBirthday(channel, d)
  * -----> checkToday
  * Sends a message that says whose birthday it is today
  * @param {Channel} channel : the channel which has been called
- * @param {boolean} daily       : says if the function has been called everyday or not
+ * @param {boolean} daily : says if the function has been called everyday or not
  * @return {void}
  */
 function checkToday(channel, daily)
@@ -242,7 +248,7 @@ function checkToday(channel, daily)
 	}
 	if(snif && !daily)
 	{
-		var bad = welcomeChannel.guild.emojis.find('name', 'FeelsBadMan');
+		var bad = welcomeChannel.guild.emojis.find(em => em.name === 'FeelsBadMan');
 		channel.send(`It\'s no one\'s birthday today ${bad}`);
 	}
 }
@@ -392,6 +398,13 @@ function getBirthday(next) {
 		var nBirthday = toDate(d.birth);
 		// Next birthday has to be after Past birthday, and Past birthday... has to be past FeelsLifeMan
 		if(isPast(nBirthday) && nBirthday >= pBirthday){
+			if(d == data[data.length -1])	// reached last element, and it is past!
+			{
+				d = data[0];	// first birthday of the new year
+				nBirthday = toDate(d.birth);
+				u = bot.users.get(d.id);
+				return `Next birthday : ${u} (${getDay(nBirthday)}, ${getMonth(nBirthday)} ${nBirthday.getDate()} ${yearHead.getFullYear() +1}). ${randomFutureWish()}`;
+			}
 			pBirthday = nBirthday;
 			u = bot.users.get(d.id);
 		}
@@ -504,7 +517,7 @@ function sendCeremony(msg, user)
 	var selectedUser = (user === "")?false:true;
 	var mabrouk = "Let us celebrate the ";
 	var un1 = "";		// ID of the first user concerned by the ceremony
-	var zhar = (selectedUser === false)?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
+	var zhar = (!selectedUser)?0.5:1;		// We give the caller of the command a fair chance, and if a user is specifically selected, even more!
 	user = (selectedUser === false)?msg.author:user;
 	
 	un1 = selectRandomUser(zhar, user.id, "");
@@ -693,7 +706,7 @@ bot.on('ready', () => {
 	welcomeChannel = bot.channels.get(random_talk);
 	testChannel = bot.channels.get(testing);
 	botChannel = bot.channels.get(birthday_bot_cn);
-	emoji = welcomeChannel.guild.emojis.find('name', 'FeelsBirthdayMan');
+	emoji = welcomeChannel.guild.emojis.find(em => em.name === 'FeelsBirthdayMan');
 	data.sort(compare)
 	time.start()
     console.log('Let\'s celebrate birthdays!!');

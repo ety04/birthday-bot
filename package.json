@@ -12,10 +12,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "cheerio-select": "0.0.3",
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.4.2",
     "easy-table": "^1.1.1",
-    "newrelic": "^4.6.0",
-    "request": "^2.87.0",
+    "newrelic": "^4.11.0",
+    "request": "^2.88.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
     "ws": "^5.2.2"
