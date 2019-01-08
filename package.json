@@ -16,6 +16,7 @@
     "easy-table": "^1.1.1",
     "newrelic": "^4.11.0",
     "request": "^2.88.0",
+    "superagent": "^4.1.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
     "ws": "^5.2.2"
