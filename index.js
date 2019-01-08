@@ -29,6 +29,7 @@ const Systime = require('systime')
 
 // Import the funniest module
 const sJoke = require('scrape_joke')
+const fJoke = require('scrape_joke_with_fml')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
@@ -79,6 +80,7 @@ var j = false;
 var c = false;
 var s = false;
 var d = false;
+var k = false;
 
 /** -------------------- INTERNAL FUNCTIONS ----------------------- */
   
@@ -475,6 +477,8 @@ function atMention()
 		s = true;  	// surprise mode activated
 	if(word === "decorations")
 		d = true;   // decorations mode activated
+	if(word === "a cake")
+		k = true;   // cake mode activated
 	return `Always here for your birthday needs. Would you like ${word}? ${emoji}`;
 }
 
@@ -482,13 +486,17 @@ function atMention()
  * -----> sendJoke
  * Sends a joke to the channel of the request message
  * @param {Message}	 msg	 : the message to check
+ * @param {boolean}	 anc	 : if we use FML (instead of a reddit page)
  * @resolve {sJoke}					 : the joke content
  */
-function sendJoke(msg)
+function sendJoke(msg, anc)
 {
 	try
 	{
-		var call = new Promise( (resolve, reject) =>
+		var call = anc?new Promise( (resolve, reject) =>
+		{
+			resolve(fJoke());
+		}): new Promise( (resolve, reject) =>
 		{
 			resolve(sJoke());
 		});
@@ -552,11 +560,36 @@ function sendCeremony(msg, user)
 }
 
 /**
+ * -----> sendCake
+ * Sends a cake to the channel of the request message
+ * @param {Message}	 msg	 : the message to check
+ * @return {String}					 : a message containing a cake!
+ */
+function sendCake()
+{
+	const cakes = [
+		`Tarte Tatin! (Tatin Pie) ${emoji} \n https://cdn.theculturetrip.com/wp-content/uploads/2016/06/1024px-tarte-tatin_-wmt_-1024x855.jpg`,
+		`Crème brûlée! (burnt cream) ${emoji} \n https://cdn.theculturetrip.com/wp-content/uploads/2016/06/4860111256_54df258833_b-1024x686.jpg`,
+		`Chocolate Mousse! ${emoji} \n https://img.theculturetrip.com/768x432/smart//wp-content/uploads/2016/06/mousse-au-cocolat.jpg`,
+		`Mille-feuilles! (Thousand papers) ${emoji} \n https://img.theculturetrip.com/768x//wp-content/uploads/2016/06/1024px-mille-feuille_20100916.jpg`,
+		`Cherry Clafoutis! ${emoji} \n https://img.buzzfeed.com/buzzfeed-static/static/2015-08/4/16/enhanced/webdr05/original-21536-1438721287-3.jpg`,
+		`Ispahan! ${emoji} \n https://img.buzzfeed.com/buzzfeed-static/static/2015-08/5/14/enhanced/webdr01/original-22172-1438799026-3.jpg`,
+		`Straw-buh-buh-buh-buh-berry Shortcake! ${emoji} \n https://confituredelice.com/wp-content/uploads/2017/05/recette-charlotte-aux-fraises.jpg`,
+		`The easiest one: Yoghurt Cake! ${emoji} \n https://www.iterroir.fr/images/photos-recettes/recette-gateau-au-yaourt-citron.jpg`,
+		`Tarte au citron! (Lemon Pie) ${emoji} \n https://www.cookomix.com/wp-content/uploads/2017/02/tarte-citron-thermomix-800x600.jpg`,
+		`Profiterolles! ${emoji} \n https://www.francetvinfo.fr/image/759r5hghk-14c1/580/326/10553867.jpg`,
+		`Saint-Honoré! ${emoji} \n https://3.bp.blogspot.com/-gFxE4x8ZXhQ/UqOnBT8c1SI/AAAAAAAAG_8/KqIKuaxXyE4/s1600/saint-honor%C3%A9.jpg`
+	];
+	var selectedCake = cakes[Math.floor(Math.random() * cakes.length)];
+	return `Here is... ${selectedCake}`;
+}
+
+/**
  * -----> selectRandomUser
  * Selects a random user, with the caller having a higher weight, eliminating someone or not from the results
- * @param {Message}	 weight			 : the weight of the caller
- * @param {Message}	 caller			 : the caller's user ID
- * @param {Message}	 eliminated	 : an already selected user's ID
+ * @param {double}	 weight			 : the weight of the caller
+ * @param {String}	 caller			 : the caller's user ID
+ * @param {String}	 eliminated	 : an already selected user's ID
  * @return {String}		 ID					 : the ID of the selected user
  */
 function selectRandomUser(weight, caller, eliminated)
@@ -683,6 +716,7 @@ function checkChannels(msg)
 	c = false;
 	s = false;
 	d = false;
+	k = false;
 	return (msg.channel === testChannel);
 }
 
@@ -754,7 +788,11 @@ bot.on("message", function (msg) {
 		}
 		// send a joke
 		if (msg.content === "!joke" && checkChannels(msg)) {
-			sendJoke(msg);
+			sendJoke(msg, false);
+		}
+		// send a joke
+		if (msg.content === "!joking" && checkChannels(msg)) {
+			sendJoke(msg, true);
 		}
 		// send a ceremony
 		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {
@@ -792,6 +830,10 @@ bot.on("message", function (msg) {
 		if (msg.content.indexOf("!decoration") === 0 && checkChannels(msg)) {
 			msg.channel.send(sendDecoration());
 		}
+		// send a cake
+		if (msg.content === "!cake" && checkChannels(msg)) {
+			msg.channel.send(sendCake());
+		}
 		// send a joke after a summon
 		if (j) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
@@ -814,6 +856,12 @@ bot.on("message", function (msg) {
 		if (d) {
 			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
 				msg.channel.send(sendDecoration());
+			}
+		}
+		// send a cake after a summon
+		if (k) {
+			if(msg.content.toLowerCase().startsWith("yes") && checkChannels(msg)) {
+				msg.channel.send(sendCake());
 			}
 		}
 		// ask Bbot about anything!
