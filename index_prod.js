@@ -549,7 +549,7 @@ function sendCeremony(msg, user)
 	mabrouk += mabrouk2;
 	if(word == "marriage")
 	{
-		 if(selectedUser === true)
+		if(selectedUser === true)
 			zhar = 0; // the first user has automatically been chosen as the parameter, so let's change
 		var un2 = selectRandomUser(zhar, user.id, un1);
 		var us2 = bot.users.get(un2);
@@ -788,11 +788,13 @@ bot.on("message", function (msg) {
 		}
 		// send a joke
 		if (msg.content === "!joke" && checkChannels(msg)) {
-			sendJoke(msg, false);
+			//sendJoke(msg, false);
+			msg.channel.send(`Joke command unavailable for the moment.`);
 		}
 		// send a joke
 		if (msg.content === "!joking" && checkChannels(msg)) {
-			sendJoke(msg, true);
+			//sendJoke(msg, true);
+			msg.channel.send(`Joking command unavailable for the moment.`);
 		}
 		// send a ceremony
 		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {

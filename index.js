@@ -788,11 +788,13 @@ bot.on("message", function (msg) {
 		}
 		// send a joke
 		if (msg.content === "!joke" && checkChannels(msg)) {
-			sendJoke(msg, false);
+			//sendJoke(msg, false);
+			msg.channel.send(`Joke command unavailable for the moment.`);
 		}
 		// send a joke
 		if (msg.content === "!joking" && checkChannels(msg)) {
-			sendJoke(msg, true);
+			//sendJoke(msg, true);
+			msg.channel.send(`Joking command unavailable for the moment.`);
 		}
 		// send a ceremony
 		if (msg.content.indexOf("!ceremony") === 0 && checkChannels(msg)) {
