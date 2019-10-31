@@ -28,8 +28,8 @@ const Table = require('easy-table')
 const Systime = require('systime')
 
 // Import the funniest module
-const sJoke = require('scrape_joke.js')
-const fJoke = require('scrape_joke_with_fml.js')
+const sJoke = require('./node_modules/scrape_joke.js')
+const fJoke = require('./node_modules/scrape_joke_with_fml.js')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
