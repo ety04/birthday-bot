@@ -18,7 +18,7 @@
     "newrelic": "^6.0.0",
     "request": "^2.88.0",
     "safe-eval": "^0.4.1",
-	"scrape-joke" : "file/scrape_joke",
+	"scrape_joke" : "file/scrape_joke",
     "superagent": "^5.1.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
