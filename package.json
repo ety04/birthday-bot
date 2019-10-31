@@ -10,15 +10,17 @@
   "author": "Ety",
   "license": "LGPL-3.0",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc.3",
     "cheerio-select": "0.0.3",
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.5.1",
     "easy-table": "^1.1.1",
-    "newrelic": "^4.11.0",
+    "google-translate-api": "^2.3.0",
+    "newrelic": "^6.0.0",
     "request": "^2.88.0",
-    "superagent": "^4.1.0",
+    "safe-eval": "^0.4.1",
+    "superagent": "^5.1.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
-    "ws": "^5.2.2"
+    "ws": "^7.2.0"
   }
 }
