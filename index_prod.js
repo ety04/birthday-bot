@@ -725,18 +725,36 @@ function niHao(msg)
 		});
 }
 
+function aNiHao(msg)
+{
+	return new Promise( (resolve, reject) => 
+	{
+		resolve(niHao(msg));
+	});	
+}
+
 /**
  * -----> sendNiHao
  * Uses niHao to send a translation
  * @param {Message}	 msg	 : the big message
  */
+function resolveNiHao(msg)
+{
+	var text_content = await(aNiHao(msg));
+	if(text_content === null)
+		console.log("The text received is null");
+	else
+		console.log("The text received is NOT null");
+	return text_content;
+}
+
 function sendNiHao(msg)
 {
 	try
 	{
 		var call = new Promise( (resolve, reject) =>
 		{
-			resolve(niHao(msg));
+			resolve(resolveNiHao(msg));
 		});
 	}
 	catch(err)
