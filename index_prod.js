@@ -720,10 +720,37 @@ function niHao(msg)
 	
 	translator(quote, {to: 'en'}).then( res =>
 		{
-			msg.channel.send(`Aha! That's ` + res.from.language.iso);
-			msg.channel.send(`==> ` + res.text);
+			console.log(res.text);
 		}).catch( err => { console.error(err);
 		});
+}
+
+/**
+ * -----> sendNiHao
+ * Uses niHao to send a translation
+ * @param {Message}	 msg	 : the message to check
+ * @resolve {sJoke}					 : the joke content
+ */
+function sendNiHao(msg)
+{
+	try
+	{
+		var call = new Promise( (resolve, reject) =>
+		{
+			resolve(niHao(msg));
+		});
+	}
+	catch(err)
+	{
+		console.log("Error while translating: " + err);
+	}
+	call.then( (res) => {
+		msg.channel.send(`Aha! That's ` + res.from.language.iso);
+		msg.channel.send(`==> ` + res.text);
+	})
+		.catch( (err) => {
+		console.log("Error translating the text: " + err);
+	});
 }
 
 /**
