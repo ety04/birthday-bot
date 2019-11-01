@@ -728,8 +728,7 @@ function niHao(msg)
 /**
  * -----> sendNiHao
  * Uses niHao to send a translation
- * @param {Message}	 msg	 : the message to check
- * @resolve {sJoke}					 : the joke content
+ * @param {Message}	 msg	 : the big message
  */
 function sendNiHao(msg)
 {
@@ -745,8 +744,8 @@ function sendNiHao(msg)
 		console.log("Error while translating: " + err);
 	}
 	call.then( (res) => {
-		msg.channel.send(`Aha! That's ` + res.from.language.iso);
-		msg.channel.send(`==> ` + res.text);
+	msg.channel.send(`Aha! That's ${res.from.language.iso}`);
+		msg.channel.send(`==> ${res.text}`);
 	})
 		.catch( (err) => {
 		console.log("Error translating the text: " + err);
