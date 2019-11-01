@@ -16,7 +16,7 @@
 /** -------------------- IMPORTS ----------------------- */
    
  // Because we don't want relics to die
- require('newrelic');
+require('newrelic');
  
 // Import the discord.js module
 const Discord = require('discord.js')
@@ -30,6 +30,9 @@ const Systime = require('systime')
 // Import the funniest module
 const sJoke = require('./scripts/scrape_joke')
 const fJoke = require('./scripts/scrape_joke_with_fml')
+
+// import an interesting module
+const translator = require('google-translate-api')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
@@ -705,6 +708,25 @@ function sendSurprise(msg, user)
 }
 
 /**
+ * -----> niHao
+ * Translates a cool text into English
+ * @param {Message}	 msg	 : the user's great message
+ * @return {void}
+ */
+function niHao(msg)
+{
+	let line = msg.content;
+	var quote = line.substr(line.indexOf(' ') + 1); // select from the first space to the end of the line
+	
+	translator(quote, {to: 'en'}).then( res =>
+		{
+			msg.channel.send(`Aha! That's ` + res.from.language.iso);
+			msg.channel.send(`==> ` + res.text);
+		}).catch( err => { console.error(err);
+		});
+}
+
+/**
  * -----> checkChannels
  * Checks if the message has been sent either in #birthday-bot or #test
  * @param {Message}	 msg	 : the message to check
@@ -873,6 +895,10 @@ bot.on("message", function (msg) {
 		// ask Bbot about a French surprise
 		if (msg.content.toLowerCase().startsWith("abot") && checkChannels(msg)) {
 			msg.channel.send(frFeel())
+		}
+		// ask Bbot to translate!
+		if (msg.content.toLowerCase().startsWith("tbot") && checkChannels(msg)) {
+			msg.channel.send(niHao(msg))
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
