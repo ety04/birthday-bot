@@ -31,6 +31,9 @@ const Systime = require('systime')
 const sJoke = require('./scripts/scrape_joke')
 const fJoke = require('./scripts/scrape_joke_with_fml')
 
+// import an interesting module
+const translator = require('@k3rn31p4nic/google-translate-api')
+
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
 // Create an instance of Discord that we will use to control the bot
@@ -705,6 +708,31 @@ function sendSurprise(msg, user)
 }
 
 /**
+ * -----> niHao
+ * Translates a cool text into English
+ * @param {Message}	 msg	 : the user's great message
+ * @return {void}
+ */
+function niHao(msg)
+{
+	let line = msg.content;
+	var quote = line.substr(line.indexOf(' ') + 1); // select from the first space to the end of the line
+	
+	translator(quote, {to: 'en'}).then( res =>
+		{
+			let lang = res.from.language.iso;
+			lang = lang.toUpperCase();
+			let result = res.text;
+			let user = nameFromID(msg.author.id);
+			console.log("Translation result: " + result);
+			msg.channel.send(`Aha! Nice find, ${user}. That's ${lang} !`);
+			msg.channel.send(`==> ${result}`);
+			
+		}).catch( err => { console.error(err);
+		});
+}
+
+/**
  * -----> checkChannels
  * Checks if the message has been sent either in #test
  * @param {Message}	 msg	 : the message to check
@@ -873,6 +901,10 @@ bot.on("message", function (msg) {
 		// ask Bbot about a French surprise
 		if (msg.content.toLowerCase().startsWith("abot") && checkChannels(msg)) {
 			msg.channel.send(frFeel())
+		}
+		// ask Bbot to translate!
+		if (msg.content.toLowerCase().startsWith("tbot") && checkChannels(msg)) {
+			niHao(msg);
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))

@@ -720,57 +720,16 @@ function niHao(msg)
 	
 	translator(quote, {to: 'en'}).then( res =>
 		{
-			console.log(res.text);
-			msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No language detected`);
-			msg.channel.send(`==> ${res.text}` || `No translation available`);
+			let lang = res.from.language.iso;
+			lang = lang.toUpperCase();
+			let result = res.text;
+			let user = nameFromID(msg.author.id);
+			console.log("Translation result: " + result);
+			msg.channel.send(`Aha! Nice find, ${user}. That's ${lang} !`);
+			msg.channel.send(`==> ${result}`);
 			
-		}).catch( err => { console.log("text was: salut"); console.error(err);
+		}).catch( err => { console.error(err);
 		});
-}
-
-function aNiHao(msg)
-{
-	return new Promise( (resolve, reject) => 
-	{
-		resolve(niHao(msg));
-	});	
-}
-
-/**
- * -----> sendNiHao
- * Uses niHao to send a translation
- * @param {Message}	 msg	 : the big message
- */
-function resolveNiHao(msg)
-{
-	var text_content = await(aNiHao(msg));
-	if(text_content === null)
-		console.log("The text received is null");
-	else
-		console.log("The text received is NOT null");
-	return text_content;
-}
-
-function sendNiHao(msg)
-{
-	try
-	{
-		var call = new Promise( (resolve, reject) =>
-		{
-			resolve(resolveNiHao(msg));
-		});
-	}
-	catch(err)
-	{
-		console.log("Error while translating: " + err);
-	}
-	call.then( (res) => {
-		msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No translation available`);
-		msg.channel.send(`==> ${res.text}` || `No translation available`);
-	})
-		.catch( (err) => {
-		console.log("Error translating the text: " + err);
-	});
 }
 
 /**
