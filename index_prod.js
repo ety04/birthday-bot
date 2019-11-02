@@ -762,7 +762,7 @@ function sendNiHao(msg)
 		console.log("Error while translating: " + err);
 	}
 	call.then( (res) => {
-	msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No translation available`);
+		msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No translation available`);
 		msg.channel.send(`==> ${res.text}` || `No translation available`);
 	})
 		.catch( (err) => {
@@ -942,7 +942,7 @@ bot.on("message", function (msg) {
 		}
 		// ask Bbot to translate!
 		if (msg.content.toLowerCase().startsWith("tbot") && checkChannels(msg)) {
-			msg.channel.send(niHao(msg))
+			sendNiHao(msg);
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
