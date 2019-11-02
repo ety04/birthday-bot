@@ -32,7 +32,7 @@ const sJoke = require('./scripts/scrape_joke')
 const fJoke = require('./scripts/scrape_joke_with_fml')
 
 // import an interesting module
-const translator = require('google-translate-api')
+const translator = require('@k3rn31p4nic/google-translate-api')
 
 /** -------------------- GLOBAL VARIABLES ----------------------- */
 
