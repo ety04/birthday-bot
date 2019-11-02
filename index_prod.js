@@ -721,6 +721,9 @@ function niHao(msg)
 	translator(quote, {to: 'en'}).then( res =>
 		{
 			console.log(res.text);
+			msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No language detected`);
+			msg.channel.send(`==> ${res.text}` || `No translation available`);
+			
 		}).catch( err => { console.error(err);
 		});
 }
@@ -942,7 +945,7 @@ bot.on("message", function (msg) {
 		}
 		// ask Bbot to translate!
 		if (msg.content.toLowerCase().startsWith("tbot") && checkChannels(msg)) {
-			sendNiHao(msg);
+			niHao(msg);
 		}
 		// answer to mention
 		if(msg.isMentioned(bot.users.get(botID)))
