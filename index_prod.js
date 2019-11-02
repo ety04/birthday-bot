@@ -718,11 +718,11 @@ function niHao(msg)
 	let line = msg.content;
 	var quote = line.substr(line.indexOf(' ') + 1); // select from the first space to the end of the line
 	
-	translator('salut', {to: 'en'}).then( res =>
+	translator(quote, {to: 'en'}).then( res =>
 		{
 			console.log(res.text);
-			//msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No language detected`);
-			//msg.channel.send(`==> ${res.text}` || `No translation available`);
+			msg.channel.send(`Aha! That's ${res.from.language.iso}` || `No language detected`);
+			msg.channel.send(`==> ${res.text}` || `No translation available`);
 			
 		}).catch( err => { console.log("text was: salut"); console.error(err);
 		});
