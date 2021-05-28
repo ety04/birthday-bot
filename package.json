@@ -22,6 +22,6 @@
     "superagent": "^5.1.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
-    "ws": "^7.2.0"
+    "ws": "^7.4.5"
   }
 }
