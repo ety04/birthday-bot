@@ -18,10 +18,9 @@
     "newrelic": "^6.0.0",
     "p-cancelable": "^2.0.0",
     "request": "^2.88.0",
-    "safe-eval": "^0.4.1",
     "superagent": "^5.1.0",
     "superscraper": "0.0.1",
     "systime": "^1.0.0",
-    "ws": "^7.2.0"
+    "ws": "^7.4.6"
   }
 }
